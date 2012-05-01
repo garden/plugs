@@ -4,15 +4,36 @@
 
 <style>
   html { font-family: monospace; }
+  table { width: 100%; }
   tr { background: #faf7fe; }
   th, td { width: 50%; }
   th { color: #aaa; text-align: right; }
 </style>
 
-{{-prof()|profile|profilename;
-<h1> {{=profilename|html}} </h1>
-<table> {{-profile|info|i;
-  <tr><th> {{=info.doc|html}}: <td> {{=info.data|json 2|html}}
-}}</table>
-}}
+<script src=lib/js/scout.js?plug=none></script>
+<script>
+function esc(str) { return str.replace('<', '&lt;'); }
 
+function templateRow(header, data) {
+  return "<tr><th>" + esc(header) + "<td>" + esc(JSON.stringify(data, 2));
+}
+
+function templateSection(name, data) {
+  return "<h1>" + esc(name) + "</h1><table>" + data.map(function (row) {
+    return templateRow(row.doc, row.data);
+  }).join('') + "</table>";
+}
+
+function templateProf(data) {
+  var str = '';
+  for (var e in data) {
+    str += templateSection(e, data[e]);
+  }
+  return str;
+}
+
+addEventListener('load', Scout.send(function(params) {
+  params.action = 'profiler';
+  params.resp = function(resp) { document.body.innerHTML = templateProf(resp); }
+}), false);
+</script>
