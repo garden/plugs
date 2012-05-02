@@ -45,7 +45,7 @@ div.container ul {
 }
 
 div.container ul li {
-  background: #900;
+  background: white; /*#900;*/
   color: white;
   padding: 2px 4px 3px;
   border-radius: 2px;
