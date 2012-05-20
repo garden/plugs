@@ -252,8 +252,8 @@ a.crumb:hover, ul#fuzzy > li > a:hover {
 a.crumb {
   display: block;
   float: left;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 3px;
+  padding-right: 3px;
   margin-right: 0;
   color: #666;
   border-right: 0 solid #CCC;
@@ -276,7 +276,7 @@ a.crumb:active {
 }
 
 a.crumb.root-crumb {
-  padding-left: 28px;
+  padding-left: 23px;
   background-image: url(/lib/img/TheFileIcon.png?plug=none);
   background-repeat: no-repeat;
   background-position: 2px 50%;
