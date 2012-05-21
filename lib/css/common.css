@@ -208,7 +208,8 @@ input:focus,textarea:focus{border-color:rgba(82, 168, 236, 0.8);-webkit-box-shad
 #toolbar input#search {
   padding: 2px 5px 3px;
   margin-top: 2px;
-  font-size: 10pt;
+  font-size: 13px;
+  box-sizing: initial;
 }
 
 #toolbar select#filetype {
@@ -236,6 +237,22 @@ input:focus,textarea:focus{border-color:rgba(82, 168, 236, 0.8);-webkit-box-shad
   margin-right: 5px;
 }
 
+.controls {
+  float: right;
+  margin-right: 3px;
+}
+
+.btn-group, .btn-group select {
+  display: inline;
+  float: left;
+}
+
+.btn img {
+  height: 18px;
+  width: 10px;
+  margin-bottom: -5px;
+}
+
 /* Entries have the following properties */
 a.crumb, ul#fuzzy > li > a, .input, .cursor {
   color: #396fac;
@@ -251,8 +268,8 @@ a.crumb:hover, ul#fuzzy > li > a:hover {
 a.crumb {
   display: block;
   float: left;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 3px;
+  padding-right: 3px;
   margin-right: 0;
   color: #666;
   border-right: 0 solid #CCC;
@@ -275,7 +292,7 @@ a.crumb:active {
 }
 
 a.crumb.root-crumb {
-  padding-left: 28px;
+  padding-left: 23px;
   background-image: url(/lib/img/TheFileIcon.png?plug=none);
   background-repeat: no-repeat;
   background-position: 2px 50%;
