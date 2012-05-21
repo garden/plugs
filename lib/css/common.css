@@ -237,6 +237,22 @@ input:focus,textarea:focus{border-color:rgba(82, 168, 236, 0.8);-webkit-box-shad
   margin-right: 5px;
 }
 
+.controls {
+  float: right;
+  margin-right: 3px;
+}
+
+.btn-group, .btn-group select {
+  display: inline;
+  float: left;
+}
+
+.btn img {
+  height: 18px;
+  width: 10px;
+  margin-bottom: -5px;
+}
+
 /* Entries have the following properties */
 a.crumb, ul#fuzzy > li > a, .input, .cursor {
   color: #396fac;

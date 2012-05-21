@@ -11,16 +11,6 @@
   width: 100%
 }
 
-.controls {
-  float: right;
-  margin-right: 3px;
-}
-
-.btn-group, .btn-group select {
-  display: inline;
-  float: left;
-}
-
 .box {
   display: none
 }
@@ -55,4 +45,9 @@ div.container ul li {
   float: right;
   clear: right;
   line-height: 1em;
+}
+
+#theme {
+  margin-left: -1px;
+  border-left: 0px;
 }
