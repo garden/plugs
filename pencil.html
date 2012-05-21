@@ -54,7 +54,9 @@
 <script>
   (function () {
     // UI elements
-    var run = Scout('#run'),
+    var undo = Scout('#undo'),
+        redo = Scout('#redo'),
+        run = Scout('#run'),
         preview = Scout('#preview'),
         download = Scout('#download'),
         settings = Scout('#settings'),
@@ -78,23 +80,23 @@
     // Mime type specific button actions
     switch(mime) {
       case 'text/html':
-        Scout('#preview').style.display = 'block';
-        Scout('#preview').href = '{{=file.path|uri}}?plug=html';
-        Scout('#run').style.display = 'block';
-        Scout('#run').href = '{{=file.path|uri}}?plug=none'; // TODO plug=raw
-        Scout('#download').style.display = 'none';
+        preview.style.display = 'block';
+        preview.href = '{{=file.path|uri}}?plug=html';
+        run.style.display = 'block';
+        run.href = '{{=file.path|uri}}?plug=none'; // TODO plug=raw
+        download.style.display = 'none';
         break;
       case 'text/x-markdown': 
-        Scout('#preview').style.display = 'block';
-        Scout('#preview').href = '{{=file.path|uri}}?plug=markdown';
+        preview.style.display = 'block';
+        preview.href = '{{=file.path|uri}}?plug=markdown';
         break;
       case 'text/x-sequence':
-        Scout('#preview').style.display = 'block';
-        Scout('#preview').href = '{{=file.path|uri}}?plug=sequence';
+        preview.style.display = 'block';
+        preview.href = '{{=file.path|uri}}?plug=sequence';
         break;
       case 'text/javascript':
-        Scout('#run').style.display = 'block';
-        Scout('#run').onclick = function(e) { runJS(); stopEvent(e) };
+        run.style.display = 'block';
+        run.onclick = function(e) { runJS(); stopEvent(e) };
         break;
     }
 
