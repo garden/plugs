@@ -20,19 +20,17 @@
     </div>
   </nav>
   <div id=controls-zone class=btn-group>
-      <a class=btn id=undo title=undo>&#8630;</a>
-      <a class=btn id=redo title=redo>&#8631;</a>
-      <a class=btn id=preview title=preview><img src=/lib/img/eye.svg?plug=none></img></a>
-      <!-- eye.svg (CC by John Caserta) -->
-      <a class=btn id=run title=run>&#9654;</a>
-      <a class=btn id=download title=download><img src=/lib/img/down.svg?plug=none></img></a>
-      <!-- down.svg (CC by The Noun Project) -->
-      <a class=btn id=settings title=settings><img src=/lib/img/gear.svg?plug=none></img></a>
-      <select onchange=selectTheme(this) id=theme title=theme>{{-
-        ['default','night','neat','monokai','elegant',
-         'cobalt','eclipse','rubyblue','lesser-dark','xq-dark']|theme|i;
-        <option{{?theme===lookup('theme'); selected}}>{{=theme|html}}</option>}}
-      </select>
+    <a class=btn id=undo title=undo><img src=/lib/icons/undo.png></img></a>
+    <a class=btn id=redo title=redo><img src=/lib/icons/redo.png></img></a>
+    <a class=btn id=preview title=preview><img src=/lib/icons/eye_open.png></a>
+    <a class=btn id=run title=run><img src=/lib/icons/play.png></img></a>
+    <a class=btn id=download title=download><img src=/lib/icons/download_alt.png></img></a>
+    <a class=btn id=settings title=settings><img src=/lib/icons/cogwheel.png></img></a>
+    <select onchange=selectTheme(this) id=theme title=theme>{{-
+      ['default','night','neat','monokai','elegant',
+       'cobalt','eclipse','rubyblue','lesser-dark','xq-dark']|theme|i;
+      <option{{?theme===lookup('theme'); selected}}>{{=theme|html}}</option>}}
+    </select>
   </div>
 </div>
 
@@ -65,10 +63,9 @@
 
     // General button actions
     disable(undo); disable(redo);
-    run.style.display = 'none';
-    preview.style.display = 'none';
-    download.href = '{{=file.path|uri}}?plug=none';
     settings.href = '{{=file.path|uri}}?plug=meta';
+    download.href = '{{=file.path|uri}}?plug=none';
+    download.style.display = 'block';
 
     // Mime type specific button actions
     switch(mime) {
