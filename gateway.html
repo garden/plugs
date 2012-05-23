@@ -27,6 +27,11 @@
     </div>
     <input id=plus class=btn value=+ type=button onfocus=showcontrols() onmouseover=showcontrols()>
   </nav>
+  <div id=controls-zone class=btn-group>
+    <a class=btn id=settings title=settings href={{=file.path|uri}}?plug=meta>
+      <img src=/lib/icons/cogwheel.png>
+    </a>
+  </div>
 </form>
 
 <ul id=fuzzy>{{-

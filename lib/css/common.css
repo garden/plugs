@@ -247,10 +247,21 @@ input:focus,textarea:focus{border-color:rgba(82, 168, 236, 0.8);-webkit-box-shad
   float: left;
 }
 
+.btn {
+  width: 13px;
+}
+
 .btn img {
-  height: 18px;
-  width: 10px;
-  margin-bottom: -5px;
+  height: 11px;
+  margin-bottom: -1px;
+}
+
+#preview img {
+  height: 9px;
+}
+
+#preview, #run, #download {
+  display: none;
 }
 
 /* Entries have the following properties */
