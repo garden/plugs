@@ -10,6 +10,13 @@
   th { color: #aaa; text-align: right; }
 </style>
 
+<form id=param action="javascript:void 0">
+  <label> Path: <input id=path></label>
+  <button type=submit> Get data for that path </button>
+</form>
+
+<div id=data></div>
+
 <script src=lib/js/scout.js?plug=none></script>
 <script>
 function esc(str) { return str.replace('<', '&lt;'); }
@@ -32,8 +39,19 @@ function templateProf(data) {
   return str;
 }
 
-addEventListener('load', Scout.send(function(params) {
+var dataElt = null;
+
+function ask (params) {
+  console.log("Something happens");
   params.action = 'profiler';
-  params.resp = function(resp) { document.body.innerHTML = templateProf(resp); }
-}), false);
+  params.data = {'File system': {path:Scout('#path').value}};
+  params.resp = function(resp) {
+    dataElt = dataElt || document.getElementById('data');
+    dataElt.innerHTML = templateProf(resp);
+  };
+}
+
+addEventListener('load', Scout.send(ask), false);
+Scout('#param').on('submit', ask);
+
 </script>
