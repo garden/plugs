@@ -4,10 +4,11 @@
 
 <style>
   html { font-family: monospace; }
-  table { width: 100%; }
+  table { width: 100%; border-spacing: 0px 2px; }
   tr { background: #faf7fe; }
   th, td { width: 50%; }
-  th { color: #aaa; text-align: right; }
+  th { color: #aaa; text-align: right; padding-right: 1em; }
+  span.unit { color: #aaa; }
 </style>
 
 <form id=param action="javascript:void 0">
@@ -21,13 +22,14 @@
 <script>
 function esc(str) { return str.replace('<', '&lt;'); }
 
-function templateRow(header, data) {
-  return "<tr><th>" + esc(header) + "<td>" + esc(JSON.stringify(data, 2));
+function templateRow(header, data, unit) {
+  return "<tr><th>" + esc(header) + "<td>" + esc('' + data) +
+        (unit? " <span class=unit>" + unit + "</span>": '');
 }
 
 function templateSection(name, data) {
   return "<h1>" + esc(name) + "</h1><table>" + data.map(function (row) {
-    return templateRow(row.doc, row.data);
+    return templateRow(row.doc, row.data, row.unit);
   }).join('') + "</table>";
 }
 
