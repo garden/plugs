@@ -48,6 +48,17 @@
     if (chan.value === '') chan.value = '#tree';
     if (nick.value === '') nick.value = 'guest';
 
+    // Say hello to the server
+    Scout.send(function(query) {
+      query.action = 'join';
+      query.data = {
+        path: {{=file.path|json}},
+        serv: serv.value,
+        nick: nick.value,
+        chan: chan.value,
+      };
+    })();
+
     // Send messages to the server
     input.on('submit', function (query) {
       query.action = 'say';
