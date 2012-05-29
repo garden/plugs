@@ -18,7 +18,7 @@ button,input,select,textarea{margin:0;font-size:100%;vertical-align:middle;}
 label,input,button,select,textarea{font-size:13px;font-weight:normal;line-height:18px;}
 input,button,select,textarea{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
 label{display:block;margin-bottom:5px;color:#333333;}
-input,textarea,select,.uneditable-input{display:inline-block;width:210px;height:18px;padding:4px;margin-bottom:9px;font-size:13px;line-height:18px;color:#555555;border:1px solid #cccccc;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+input,textarea,select,.uneditable-input{display:inline-block;width:190px;height:18px;padding:4px;margin-bottom:9px;font-size:13px;line-height:18px;color:#555555;border:1px solid #cccccc;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 .uneditable-textarea{width:auto;height:auto;}
 label input,label textarea,label select{display:block;}
 input[type="image"],input[type="checkbox"],input[type="radio"]{width:auto;height:auto;padding:0;margin:3px 0;*margin-top:0;line-height:normal;cursor:pointer;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;border:0 \9;}
@@ -307,4 +307,25 @@ a.crumb.root-crumb {
   background-image: url(/lib/img/TheFileIcon.png?plug=none);
   background-repeat: no-repeat;
   background-position: 2px 50%;
+}
+
+/* right side panel*/
+div.panel ul {
+  position: fixed;
+  right: 20px;
+  top: 40px;
+  margin: 0px;
+  list-style: none
+}
+
+div.panel ul li {
+  background: white; /*#900;*/
+  padding: 2px 4px 3px;
+  border-radius: 2px;
+  margin-bottom: 3px;
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 9pt;
+  float: right;
+  clear: right;
+  line-height: 1em;
 }
