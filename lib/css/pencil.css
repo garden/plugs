@@ -26,27 +26,6 @@
   bottom: 100%
 }
 
-div.container ul {
-  position: fixed;
-  right: 20px;
-  top: 40px;
-  margin: 0px;
-  list-style: none
-}
-
-div.container ul li {
-  background: white; /*#900;*/
-  color: white;
-  padding: 2px 4px 3px;
-  border-radius: 2px;
-  margin-bottom: 3px;
-  font-family: "Ubuntu Mono", monospace;
-  font-size: 9pt;
-  float: right;
-  clear: right;
-  line-height: 1em;
-}
-
 #theme {
   margin-left: -1px;
   border-left: 0px;
