@@ -10,22 +10,15 @@
 <link rel=stylesheet href=/lib/css/common.css?plug=none>
 <link rel=stylesheet href=/lib/css/gateway.css?plug=none>
 
-<form id=toolbar action="javascript:void 0" autocomplete=off>
-  <nav id=location-zone>
+<form id=toolbar action=javascript:void(0) autocomplete=off>
+  <nav id=location-zone class=btn-group>
     <div id=crumbs>{{-
     nav|crumb|i;
       <a href={{=crumb.path|uri}} class="crumb{{? i == 0; root-crumb}}">{{=crumb.name|html}}</a>}}
     </div>
     <input id=search type=search class=input placeholder=search… autofocus>
-    <div id=controls style='display:none'>
-      <select id=filetype>
-        <option selected>file</option>
-        <option>folder</option>
-        <!-- <option>link</option> -->
-      </select>
-      <input id=create class=btn value=create type=button>
-    </div>
-    <input id=plus class=btn value=+ type=button onfocus=showcontrols() onmouseover=showcontrols()>
+    <a class=btn id=newfolder title=add><img src=/lib/icons/folder_add.png></a>
+    <a class=btn id=newfile title=add><img src=/lib/icons/file_add.png></a>
   </nav>
   <div id=controls-zone class=btn-group>
     <a class=btn id=settings title=settings href={{=file.path|uri}}?plug=meta>
