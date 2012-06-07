@@ -2,11 +2,40 @@
 <meta charset=utf-8>
 <title> {{=title|html}}  </title>
 
+<style>
+p#saved { visibility: hidden; }
+</style>
+
 <div id=show></div>
+<button id=save> Save </button>
+<p id=saved></p>
 
 <script src='/lib/js/webjson.js?plug=none'></script>
+<script src='/lib/js/scout.js?plug=none'></script>
 
 <script>
-  JSON.web( {{=file.meta|json}},
-  'show', {template: 'editable'});
+onload = function() {
+  JSON.web({{=file.meta|json}},
+  'show', {template: 'rewrite'});
+
+  var save = Scout('#save'),
+      saved = Scout('#saved');
+  save.on('click', function(param) {
+    save.disabled = true;
+    saved.textContent = 'Saving…';
+    saved.style.visibility = 'visible';
+
+    param.action = 'meta-save';
+    param.data = {path:"{{=file.path|jsonstring}}", meta:JSON.getweb.show};
+    param.resp = function(resp) {
+      if (!resp.err) {
+        save.disabled = false;
+        saved.textContent = 'Saved!';
+        setTimeout(function () {
+          saved.style.visibility = 'hidden';
+        }, 1000);
+      } 
+    };
+  });
+};
 </script>
