@@ -55,7 +55,7 @@
 
     // Template information
     var socket = Scout.socket({{=file.path|json}}),
-        mime = {{=file.mime|json}},
+        mime = {{=file.meta.type|json}} || 'text/plain',
         theme = {{=lookup('theme')|json}} || 'default',
         keymap = {{=lookup('keymap')|json}} || 'default',
         lineNumbers = {{=lookup('lineNumbers')|json}} || true,
@@ -76,7 +76,7 @@
         run.href = '{{=file.path|uri}}?plug=none'; // TODO plug=raw
         download.style.display = 'none';
         break;
-      case 'text/x-markdown': 
+      case 'text/x-markdown':
         preview.style.display = 'block';
         preview.href = '{{=file.path|uri}}?plug=markdown';
         break;
