@@ -197,19 +197,21 @@ input:focus,textarea:focus{border-color:rgba(82, 168, 236, 0.8);-webkit-box-shad
   overflow: hidden;
 }
 
-#toolbar input, form#toolbar select {
+#toolbar input, #toolbar select {
   display: block;
   float: left;
   margin-right: 5px;
-
-  font-size: 9pt;
 }
 
 #toolbar input#search {
-  padding: 2px 5px 3px;
-  margin-top: 2px;
+  padding: 4px;
+  margin: 0px 0px 0px 2px;
   font-size: 13px;
+  width: 170px;
   box-sizing: initial;
+  -webkit-border-radius:3px 0px 0px 3px;
+     -moz-border-radius:3px 0px 0px 3px;
+          border-radius:3px 0px 0px 3px;
 }
 
 #toolbar select#filetype {
@@ -237,30 +239,41 @@ input:focus,textarea:focus{border-color:rgba(82, 168, 236, 0.8);-webkit-box-shad
   margin-right: 5px;
 }
 
-.controls {
+#toolbar .controls {
   float: right;
   margin-right: 3px;
 }
 
-.btn-group, .btn-group select {
+#toolbar .btn-group, #toolbar .btn-group select {
   display: inline;
   float: left;
 }
 
-.btn {
+#toolbar .btn {
   width: 13px;
+  height: 18px;
 }
 
-.btn img {
+#toolbar .btn img {
   height: 11px;
   margin-bottom: -1px;
 }
 
-#preview img {
+#toolbar #preview img {
   height: 9px;
 }
 
-#preview, #run, #download {
+#toolbar #newfolder img {
+  height: 13px;
+  padding-top: 3px;
+}
+
+#toolbar #newfile img {
+  height: 12px;
+  padding-top: 4px;
+}
+
+#toolbar #preview, #toolbar #run, #toolbar #download {
   display: none;
 }
 
@@ -279,8 +292,8 @@ a.crumb:hover, ul#fuzzy > li > a:hover {
 a.crumb {
   display: block;
   float: left;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 2px;
+  padding-right: 2px;
   margin-right: 0;
   color: #666;
   border-right: 0 solid #CCC;
