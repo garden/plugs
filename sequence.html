@@ -6,18 +6,23 @@
 <link rel=stylesheet href=/lib/css/preview.css?plug=none>
 
 <iframe id=source src="{{=file.path|uri}}?plug=pencil"></iframe>
+<p>Open issues <a href="https://github.com/tpatel/OpenSequenceDiagrams.js/issues">here</a> if you find something going wrong !</p>
+<div id=error></div>
 <div id=preview></div>
 
 <script src=/lib/js/OpenSequenceDiagrams.js?plug=none></script>
 
 <script>
   var source =  document.getElementById('source'),
+      error =  document.getElementById('error'),
       preview = document.getElementById('preview');
   
   source.contentWindow.addEventListener('message', function(event) {
 	var schema = new Schema(),
-	    error = schema.parseLines(event.data);
+	    errorText = schema.parseLines(event.data);
+    error.innerHTML = errorText;
     preview.innerHTML = schema.getSVG();
+    
   });
 </script>
 
