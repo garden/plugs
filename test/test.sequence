@@ -25,7 +25,8 @@ loop 9001 times
         Alice-->L: he said stop!!!1
     }
   end
-endparticipant Bob
+end
+participant Bob
 participant Alice
 participant "I have a really\nlong name" as L
 
