@@ -19,10 +19,11 @@
         {{=crumb.name|html}}</a>}}
     </div>
   </nav>
-  <div id=controls-zone class=btn-group>
+  <form id=controls-zone class=btn-group name=export method=post target=_blank enctype=multipart/form-data>
     <a class=btn id=undo title=undo><img src=/lib/icons/undo.png></a>
     <a class=btn id=redo title=redo><img src=/lib/icons/redo.png></a>
     <a class=btn id=preview title=preview><img src=/lib/icons/eye_open.png></a>
+    <a class=btn id=validate title=validate><img src=/lib/icons/check.png></a>
     <a class=btn id=run title=run><img src=/lib/icons/play.png></a>
     <a class=btn id=download title=download><img src=/lib/icons/download_alt.png></a>
     <a class=btn id=settings title=settings><img src=/lib/icons/cogwheel.png></a>
@@ -31,7 +32,10 @@
        'cobalt','eclipse','rubyblue','lesser-dark','xq-dark']|theme|i;
       <option{{?theme===lookup('theme'); selected}}>{{=theme|html}}</option>}}
     </select>
-  </div>
+    <input type=hidden name=ucn_text>
+    <input type=hidden name=ucn_text_mime>
+    <input type=hidden name=ucn_task value=conformance>
+  </form>
 </div>
 
 <base target=_parent>
@@ -47,8 +51,9 @@
     // UI elements
     var undo = Scout('#undo'),
         redo = Scout('#redo'),
-        run = Scout('#run'),
+        validate = Scout('#validate'),
         preview = Scout('#preview'),
+        run = Scout('#run'),
         download = Scout('#download'),
         settings = Scout('#settings'),
         wrapper = Scout('#wrapper'), delay;
@@ -60,42 +65,10 @@
         keymap = {{=lookup('keymap')|json}} || 'default',
         lineNumbers = {{=lookup('lineNumbers')|json}} || true,
         lineWrapping = {{=lookup('lineWrapping')|json}} || false;
-
-    // General button actions
-    disable(undo); disable(redo);
-    settings.href = '{{=file.path|uri}}?plug=meta';
-    download.href = '{{=file.path|uri}}?plug=none';
-    download.style.display = 'block';
-
-    // Mime type specific button actions
-    switch(mime) {
-      case 'text/html':
-        preview.style.display = 'block';
-        preview.href = '{{=file.path|uri}}?plug=html';
-        run.style.display = 'block';
-        run.href = '{{=file.path|uri}}?plug=none'; // TODO plug=raw
-        download.style.display = 'none';
-        break;
-      case 'text/x-markdown':
-        preview.style.display = 'block';
-        preview.href = '{{=file.path|uri}}?plug=markdown';
-        break;
-      case 'text/x-sequence':
-        preview.style.display = 'block';
-        preview.href = '{{=file.path|uri}}?plug=sequence';
-        break;
-      case 'text/javascript':
-        run.style.display = 'block';
-        run.onclick = function(e) { runJS(); stopEvent(e) };
-        break;
-    }
-
+  
     // Update UI elements on content changes
     function onChange() {
       postMessage(cm.getValue(), '*');
-      // Use this instead if browser CPU load is too intense:
-      //clearTimeout(delay);
-      //delay = setTimeout(function(){postMessage(cm.getValue(), '*');}, 150);
       if (cmClient) {
         maybeEnable(cmClient.undoStack, undo);
         maybeEnable(cmClient.redoStack, redo);
@@ -124,6 +97,46 @@
       document.body.className =
         document.body.className.replace(/cm-s-\w+/, 'cm-s-' + theme);
     }; cm.setTheme(theme);
+
+    // General button actions
+    disable(undo); disable(redo);
+    validate.target = run.target = download.target = settings.target = '_blank';
+    download.href = '{{=file.path|uri}}?plug=none';
+    settings.href = '{{=file.path|uri}}?plug=meta';
+    download.style.display = 'block';
+
+    // Mime type specific button actions
+    switch(mime) {
+      case 'text/html': case 'html':
+        document.export.action = 'http://validator.w3.org/unicorn/check#validate-by-input';
+        document.export.ucn_text_mime.value = 'text/html';
+        validate.style.display = 'block';
+        validate.href = 'http://validator.w3.org/unicorn/';
+        validate.onclick = function(e) {
+          document.export.ucn_text.value = cm.getValue();
+          document.export.submit();
+          stopEvent(e);
+        }
+        preview.style.display = 'block';
+        preview.href = '{{=file.path|uri}}?plug=html';
+        run.style.display = 'block';
+        run.href = '{{=file.path|uri}}?plug=none'; // TODO plug=raw
+        download.style.display = 'none';
+        break;
+      case 'text/x-markdown': case 'markdown':
+        preview.style.display = 'block';
+        preview.href = '{{=file.path|uri}}?plug=markdown';
+        break;
+      case 'text/x-sequence': case 'sequence':
+        preview.style.display = 'block';
+        preview.href = '{{=file.path|uri}}?plug=sequence';
+        break;
+      case 'text/javascript': case 'javascript':
+        run.style.display = 'block';
+        run.onclick = function(e) { runJS(); stopEvent(e); };
+        break;
+    }
+
   })();
 
 </script>
