@@ -32,9 +32,12 @@
        'cobalt','eclipse','rubyblue','lesser-dark','xq-dark']|theme|i;
       <option{{?theme===lookup('theme'); selected}}>{{=theme|html}}</option>}}
     </select>
+    <input type=hidden name=code>
+    <input type=hidden name=lang>
     <input type=hidden name=ucn_text>
     <input type=hidden name=ucn_text_mime>
     <input type=hidden name=ucn_task value=conformance>
+    <input type=hidden name=run value=True>
   </form>
 </div>
 
@@ -107,16 +110,12 @@
 
     // Mime type specific button actions
     switch(mime) {
+      case 'text/javascript': case 'javascript':
+        run.style.display = 'block';
+        run.onclick = function(e) { runJS(); stopEvent(e); };
+        break;
       case 'text/html': case 'html':
-        document.export.action = 'http://validator.w3.org/unicorn/check#validate-by-input';
-        document.export.ucn_text_mime.value = 'text/html';
-        validate.style.display = 'block';
-        validate.href = 'http://validator.w3.org/unicorn/';
-        validate.onclick = function(e) {
-          document.export.ucn_text.value = cm.getValue();
-          document.export.submit();
-          stopEvent(e);
-        }
+        unicorn('text/html');
         preview.style.display = 'block';
         preview.href = '{{=file.path|uri}}?plug=html';
         run.style.display = 'block';
@@ -131,11 +130,46 @@
         preview.style.display = 'block';
         preview.href = '{{=file.path|uri}}?plug=sequence';
         break;
-      case 'text/javascript': case 'javascript':
-        run.style.display = 'block';
-        run.onclick = function(e) { runJS(); stopEvent(e); };
-        break;
+      case 'text/css': case 'css': unicorn('text/css'); break;
+      case 'text/xml': case 'xml': case 'application/xml': unicorn('text/xml'); break;
+      case 'text/x-csrc': codepad('C'); break;
+      case 'text/x-c++src': codepad('C++'); break;
+      case 'text/x-dsrc': codepad('D'); break;
+      case 'text/x-haskell': codepad('Haskell'); break;
+      case 'text/x-lua': codepad('Lua'); break;
+      case 'text/x-ocaml': codepad('OCaml'); break;
+      case 'text/x-php': codepad('PHP'); break;
+      case 'text/x-perl': codepad('Perl'); break;
+      case 'text/x-python': codepad('Python'); break;
+      case 'text/x-ruby': codepad('Ruby'); break;
+      case 'text/x-scheme': codepad('Scheme'); break;
+      case 'text/x-tcl': codepad('Tcl'); break;
     }
+        
+    // Export code to Codepad for remote execution
+    function codepad(lang) {
+      document.export.action = run.href = 'http://codepad.org/';
+      document.export.lang.value = lang;
+      run.style.display = 'block';
+      run.onclick = function(e) {
+        document.export.code.value = cm.getValue();
+        document.export.submit();
+        stopEvent(e);
+      }
+    }
+  
+    // Export code to Unicorn for HTML/CSS/XML validation
+    function unicorn(mime) {
+      document.export.action = 'http://validator.w3.org/unicorn/check#validate-by-input';
+      document.export.ucn_text_mime.value = mime;
+      validate.style.display = 'block';
+      validate.href = 'http://validator.w3.org/unicorn/';
+      validate.onclick = function(e) {
+        document.export.ucn_text.value = cm.getValue();
+        document.export.submit();
+        stopEvent(e);
+      }
+  	}
 
   })();
 
