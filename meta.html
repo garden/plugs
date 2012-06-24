@@ -2,16 +2,14 @@
 <meta charset=utf-8>
 <title> {{=title|html}}  </title>
 
-<style>
-p#saved { visibility: hidden; }
-</style>
+<style> p#saved { visibility: hidden; } </style>
 
 <div id=show></div>
 <button id=save> Save </button>
 <p id=saved></p>
 
 <script src='/lib/js/webjson.js?plug=none'></script>
-<script src='/lib/js/scout.js?plug=none'></script>
+<script src='/lib/js/scout.js'></script>
 
 <script>
 onload = function() {
@@ -20,6 +18,7 @@ onload = function() {
 
   var save = Scout('#save'),
       saved = Scout('#saved');
+  
   save.on('click', function(param) {
     save.disabled = true;
     saved.textContent = 'Saving…';
