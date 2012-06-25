@@ -11,7 +11,7 @@
   span.unit { color: #aaa; }
 </style>
 
-<form id=param action="javascript:void 0">
+<form id=param action='javascript:void 0'>
   <label> Path: <input id=path></label>
   <button type=submit> Get data for that path </button>
 </form>
@@ -20,40 +20,69 @@
 
 <script src=lib/js/scout.js?plug=none></script>
 <script>
-function esc(str) { return str.replace('<', '&lt;'); }
-
-function templateRow(header, data, unit) {
-  return "<tr><th>" + esc(header) + "<td>" + esc('' + data) +
-        (unit? " <span class=unit>" + unit + "</span>": '');
-}
-
-function templateSection(name, data) {
-  return "<h1>" + esc(name) + "</h1><table>" + data.map(function (row) {
-    return templateRow(row.doc, row.data, row.unit);
-  }).join('') + "</table>";
-}
-
-function templateProf(data) {
-  var str = '';
-  for (var e in data) {
-    str += templateSection(e, data[e]);
-  }
-  return str;
-}
-
-var dataElt = null;
-
-function ask (params) {
-  console.log("Something happens");
-  params.action = 'profiler';
-  params.data = {'File system': {path:Scout('#path').value}};
-  params.resp = function(resp) {
-    dataElt = dataElt || document.getElementById('data');
-    dataElt.innerHTML = templateProf(resp);
+  function esc(str) { return str.replace('<', '&lt;'); }
+  
+  var formatData = {
+    raw: function(data, unit) {
+      return data + (unit ? ' <span class=unit>' + unit + '</span>' : '');
+    },
+    seconds: function(data, unit) {
+      var s = parseInt(data) % 60,
+          m = parseInt(data / 60) % 60,
+          h = parseInt(data / 3600) % 24,
+          d = parseInt(data / 86400);
+      function digits(n) {
+        return (n < 10 ? '0' + n : n);
+      };
+      return d + ' <span class=unit>days</span> ' +
+        digits(h) + '<span class=unit>:</span class=unit>' +
+        digits(m) + '<span class=unit>:</span class=unit>' +
+        digits(s);
+    },
+    bytes: function(data, unit) {
+      console.log(data,unit);
+      var units = ['','k','M','G','T','P','E','Z','Y'];
+      for (var i = 0, max = 1 ; i < units.length ; i++) {
+        if (data < max * 1024)
+          return parseInt(100 * data / max) / 100 + ' <span class=unit>' + units[i] + 'B</span>';
+        max *= 1024;
+      }
+    }
   };
-}
-
-addEventListener('load', Scout.send(ask), false);
-Scout('#param').on('submit', ask);
-
+  
+  function templateRow(header, data, unit) {
+    var html = '<tr><th>' + esc(header) + '<td>', data = esc('' + data);
+    return html + (formatData[unit] || formatData.raw)(data, unit);
+  }
+  
+  function templateSection(name, data) {
+    return '<h1>' + esc(name) + '</h1><table>' + data.map(function (row) {
+      return templateRow(row.doc, row.data, row.unit);
+    }).join('') + '</table>';
+  }
+  
+  function templateProf(data) {
+    var str = '';
+    for (var e in data) {
+      str += templateSection(e, data[e]);
+    }
+    return str;
+  }
+  
+  var dataElt = null;
+  
+  function ask (params) {
+    params.action = 'profiler';
+    params.data = {'File system': {path:Scout('#path').value}};
+    params.resp = function(resp) {
+      dataElt = dataElt || document.getElementById('data');
+      dataElt.innerHTML = templateProf(resp);
+    };
+  }
+  
+  addEventListener('load', Scout.send(ask), false);
+  Scout('#param').on('submit', ask);
 </script>
+
+<!-- Google Analytics -->
+<script>var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-27876347-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})()</script>
