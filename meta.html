@@ -1,10 +1,16 @@
 <!doctype html>
 <meta charset=utf-8>
-<title> {{=title|html}}  </title>
+<title> Metadata of {{=title|html}}  </title>
 
-<style> p#saved { visibility: hidden; } </style>
+<style>
+  html body { font-family: monospace; }
+  p#saved { visibility: hidden; }
+  div#show { margin-bottom: 13px; }
+</style>
 
-<div id=show></div>
+<p> Click on an item to edit it. </p>
+
+<div class='webjson-element' id=show></div>
 <button id=save> Save </button>
 <p id=saved></p>
 
@@ -18,7 +24,7 @@ onload = function() {
 
   var save = Scout('#save'),
       saved = Scout('#saved');
-  
+
   save.on('click', function(param) {
     save.disabled = true;
     saved.textContent = 'Saving…';
