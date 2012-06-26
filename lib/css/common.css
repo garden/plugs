@@ -273,7 +273,7 @@ input:focus,textarea:focus{border-color:rgba(82, 168, 236, 0.8);-webkit-box-shad
   padding-top: 4px;
 }
 
-#toolbar #preview, #toolbar #run, #toolbar #download {
+#toolbar #preview, #toolbar #run, #toolbar #validate, #toolbar #download {
   display: none;
 }
 
