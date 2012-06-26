@@ -1,17 +1,21 @@
 <!doctype html>
 <meta charset=utf-8>
-<title> {{=title|html}}  </title>
+<title> Metadata of {{=title|html}}  </title>
 
 <style>
-p#saved { visibility: hidden; }
+  html body { font-family: monospace; }
+  p#saved { visibility: hidden; }
+  div#show { margin-bottom: 13px; }
 </style>
 
-<div id=show></div>
+<p> Click on an item to edit it. </p>
+
+<div class='webjson-element' id=show></div>
 <button id=save> Save </button>
 <p id=saved></p>
 
-<script src='/lib/js/webjson.js?plug=none'></script>
-<script src='/lib/js/scout.js?plug=none'></script>
+<script src='/lib/js/webjson.js'></script>
+<script src='/lib/js/scout.js'></script>
 
 <script>
 onload = function() {
@@ -20,6 +24,7 @@ onload = function() {
 
   var save = Scout('#save'),
       saved = Scout('#saved');
+
   save.on('click', function(param) {
     save.disabled = true;
     saved.textContent = 'Saving…';
@@ -34,7 +39,7 @@ onload = function() {
         setTimeout(function () {
           saved.style.visibility = 'hidden';
         }, 1000);
-      } 
+      }
     };
   });
 };
