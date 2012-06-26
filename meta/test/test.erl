@@ -1,1 +1,1 @@
-{"type":"text/x-erlang"}
+{"type":"text/plain"}
