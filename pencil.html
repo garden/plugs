@@ -3,7 +3,7 @@
 <meta name=viewport content='width=device-width'>
 <title> {{=title|html}} </title>
 
-<link rel=stylesheet href=/lib/cm/codemirror2012-05-23.css?plug=none>
+<link rel=stylesheet href=/lib/cm/codemirror2012-06-27.css?plug=none>
 <link rel=stylesheet href=/lib/css/common.css?plug=none>
 <link rel=stylesheet href=/lib/css/pencil.css?plug=none>
 
@@ -28,8 +28,8 @@
     <a class=btn id=download title=download><img src=/lib/icons/download_alt.png></a>
     <a class=btn id=settings title=settings><img src=/lib/icons/cogwheel.png></a>
     <select onchange=selectTheme(this) id=theme title=theme>{{-
-      ['default','night','neat','monokai','elegant',
-       'cobalt','eclipse','rubyblue','lesser-dark','xq-dark']|theme|i;
+      ['default','ambiance','blackboard','cobalt','eclipse','elegant','erlang-dark',
+       'lesser-dark','monokai','neat','night','rubyblue','vibrant-ink','xq-dark']|theme|i;
       <option{{?theme===lookup('theme'); selected}}>{{=theme|html}}</option>}}
     </select>
     <input type=hidden name=code>
@@ -44,7 +44,7 @@
 <base target=_parent>
 
 <script src=/$socket.io/socket.io.js></script>
-<script src=/lib/cm/codemirror2012-05-23.js?plug=none></script>
+<script src=/lib/cm/codemirror2012-06-27.js?plug=none></script>
 <script src=/lib/js/scout.js?plug=none></script>
 <script src=/lib/js/ot-min.js?plug=none></script>
 <script src=/lib/js/pencil.js?plug=none></script>

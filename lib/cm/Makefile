@@ -1,25 +1,27 @@
 JSMIN = uglifyjs
 CSSMIN = cat
 DATE = $$(date "+%Y-%m-%d")
+JSFILE = codemirror$(DATE).js
+CSSFILE = codemirror$(DATE).css
 
 update:
+	@rm -rf mirror/
 	@git clone http://github.com/marijnh/CodeMirror2 mirror
 	@cp -rf mirror/LICENSE .
-	@cp -rf mirror/README.md .
 	@echo "Compressing js files..."
-	@JSFILE=codemirror$(DATE).js;  \
-	cat mirror/lib/codemirror.js | $(JSMIN) > $$JSFILE;  \
-	cat mirror/lib/util/*.js | $(JSMIN) >> $$JSFILE;  \
-	cat mirror/mode/*/*.js | $(JSMIN) >> $$JSFILE;  \
-	cat mirror/mode/rpm/*/*.js | $(JSMIN) >> $$JSFILE;  \
-	cat mirror/keymap/*.js | $(JSMIN) >> $$JSFILE
+	@cat mirror/lib/codemirror.js | $(JSMIN) > $(JSFILE);  \
+	cat mirror/lib/util/*.js | $(JSMIN) >> $(JSFILE);  \
+	cat mirror/mode/*/*.js | $(JSMIN) >> $(JSFILE);  \
+	cat mirror/mode/rpm/*/*.js | $(JSMIN) >> $(JSFILE);  \
+	cat mirror/keymap/*.js | $(JSMIN) >> $(JSFILE)
+	@echo "Created: $(JSFILE)"
 	@echo "Compressing css files..."
-	@CSSFILE=codemirror$(DATE).css;  \
-	cat mirror/lib/*.css | $(CSSMIN) > $$CSSFILE;  \
-	cat mirror/lib/util/*.css | $(CSSMIN) >> $$CSSFILE;  \
-	cat mirror/theme/*.css | $(CSSMIN) >> $$CSSFILE; \
-	cat mirror/mode/*/*.css | $(CSSMIN) >> $$CSSFILE; \
-	cat mirror/mode/*/*/*.css | $(CSSMIN) >> $$CSSFILE
+	@cat mirror/lib/*.css | $(CSSMIN) > $(CSSFILE);  \
+	cat mirror/lib/util/*.css | $(CSSMIN) >> $(CSSFILE);  \
+	cat mirror/theme/*.css | $(CSSMIN) >> $(CSSFILE); \
+	cat mirror/mode/*/*.css | $(CSSMIN) >> $(CSSFILE); \
+	cat mirror/mode/*/*/*.css | $(CSSMIN) >> $(CSSFILE)
+	@echo "Created: $(CSSFILE)"
 	@rm -rf mirror
 	@echo
 	@echo "Don't forget to update types and paths!"
