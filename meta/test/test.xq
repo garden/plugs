@@ -1,1 +1,1 @@
-{"type":"text/plain"}
+{"type":"application/xquery"}
