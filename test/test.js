@@ -46,3 +46,4 @@ StringStream.prototype = {
   }
 };
 
+'yeah!'
