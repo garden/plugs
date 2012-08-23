@@ -1,6 +1,8 @@
 SCOUT CAMP
 ==========
 
+This is awesome !
+I wonder how they manage to get codemirror work with that showdown look alike
 
 Dealing with server systems can be alleviated by systems which allow clear
 distinction between:
