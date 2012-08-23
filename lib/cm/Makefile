@@ -1,3 +1,5 @@
+# this build script requires Uglify: sudo npm install -g uglify-js
+
 JSMIN = uglifyjs
 CSSMIN = cat
 DATE = $$(date "+%Y-%m-%d")
