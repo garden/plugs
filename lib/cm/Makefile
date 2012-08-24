@@ -8,7 +8,7 @@ CSSFILE = codemirror$(DATE).css
 
 update:
 	@rm -rf mirror/
-	@git clone http://github.com/marijnh/CodeMirror2 mirror
+	@git clone http://github.com/marijnh/CodeMirror mirror
 	@cp -rf mirror/LICENSE .
 	@echo "Compressing js files..."
 	@cat mirror/lib/codemirror.js | $(JSMIN) > $(JSFILE);  \
