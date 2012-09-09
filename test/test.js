@@ -1,12 +1,34 @@
 // Demo code (the actual new parser character stream implementation)
 
+/**
+	@brief Stringstream constructor.
+
+	This stringstream object makes it easy to parse streams.
+
+	@param string The initial string.
+*/
 function StringStream(string) {
+  /**
+	@id Stringstream.pos
+
+	This is an integer variable used to know at which position we currently are
+	in the stringstream.
+  */
   this.pos = 0;
   this.string = string;
 }
 
 StringStream.prototype = {
+  /**
+	@id Stringstream.done
+	@return True if all the stringstream has been read.
+  */
   done: function() {return this.pos >= this.string.length;},
+
+  /**
+	@brief The name is kind of explicit, isn't it?
+	@return The current char we're reading.
+  */
   peek: function() {return this.string.charAt(this.pos);},
   next: function() {
     if (this.pos < this.string.length)
@@ -45,5 +67,4 @@ StringStream.prototype = {
     }
   }
 };
-
-'yeah!'
+'Yeah!'

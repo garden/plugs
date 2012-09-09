@@ -24,10 +24,10 @@ func filter(src <-chan int, dst chan<- int, prime int) {
 }
 
 // The prime sieve: Daisy-chain filter processes together.
-func sieve() {
+func sieve(n int) {
     ch := make(chan int)  // Create a new channel.
     go generate(ch)       // Start generate() as a subprocess.
-    for {
+    for i := 0; i < n; i++ {
         prime := <-ch
         fmt.Print(prime, "\n")
         ch1 := make(chan int)
@@ -37,6 +37,6 @@ func sieve() {
 }
 
 func main() {
-    sieve()
+    sieve(1000)
 }
 
