@@ -1,0 +1,25 @@
+/* read the numbers; notice: each line of the input must be followed by an EOF character */
+x = read();
+ 
+/* multiplication table */
+for (i=1; i<=x; ++i)
+{
+        for (j=1; j<=x; ++j) print i*j, "\t"
+        print "\n"
+}
+ 
+/* compute the pi number accurately to 10 decimal places */
+scale=x
+print "\npi = ", 4*a(1), "\n"
+ 
+/* factorial */
+define f(n)
+{
+        if (n <= 1) return 1;
+        return n * f(n-1);
+}
+ 
+print "\n";
+print "1! = ", f(1), "\n";
+print "5! = ", f(5), "\n";
+print x, "! = ", f(x), "\n";

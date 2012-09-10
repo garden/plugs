@@ -1,0 +1,20 @@
+(defrule readin
+        ?f<-(initial-fact)
+=>
+        (retract ?f)
+        (assert (number (read)))
+)
+ 
+(defrule writeout
+        ?f<-(number ?n)(test (<> ?n 42))
+=>
+        (retract ?f)
+        (printout t ?n crlf)
+        (assert (initial-fact))
+)
+ 
+(reset)
+ 
+(run)
+ 
+(exit)

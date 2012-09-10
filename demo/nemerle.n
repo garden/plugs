@@ -1,0 +1,15 @@
+using System;
+public class Test
+{
+        public static Main() : void
+        {
+                def solve() : void {
+                        def i = int.Parse(Console.ReadLine());
+                        unless (i == 42) {
+                                Console.WriteLine(i);
+                                solve();
+                        }
+                }
+                solve();
+        }
+}
