@@ -1,0 +1,4 @@
+procedure main () 
+    while (l := read()) ~= 42 do 
+       write(l); 
+ end
