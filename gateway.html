@@ -1,37 +1,25 @@
 <!doctype html>
 <meta charset=utf-8>
-<!-- <meta name=viewport content='width=device-width'> -->
+<meta name=viewport content='width=device-width'>
 <title> {{=title|html}} </title>
 
-<link rel=stylesheet href=/lib/css/common.css?plug=none>
-<link rel=stylesheet href=/lib/css/gateway.css?plug=none>
+<link rel=stylesheet href=/lib/css/ui.css?plug=none>
 
-<form id=toolbar action=javascript:void(0) autocomplete=off>
-  <nav id=location-zone class=btn-group>
-    <div id=crumbs>{{-
-    nav|crumb|i;
-      <a href={{=crumb.path|uri}} class="crumb{{? i == 0; root-crumb}}">{{=crumb.name|html}}</a>}}
-    </div>
-    <input id=search type=search class=input placeholder=search… autofocus>
-    <a class=btn id=newfolder title='create folder'><img src=/lib/icons/folder_add.png></a>
-    <a class=btn id=newfile title='create file'><img src=/lib/icons/file_add.png></a>
-  </nav>
-  <div id=controls-zone class=btn-group>
-    <a class=btn id=settings title=settings href={{=file.path|uri}}?plug=meta>
-      <img src=/lib/icons/cogwheel.png>
-    </a>
-  </div>
+<form id=toolbar action=javascript:void(0) autocomplete=off>{{-nav|crumb|i;
+  <a href={{=crumb.path|uri}} class="item{{? i == 0; root-crumb}}">{{=crumb.name|html}}</a>}}
+  <input id=search type=search placeholder=search… autofocus>
+  <a class=item id=newfile title='create file'>+<img src=/lib/icons/file_lines.png></a>
+  <a class=item id=newfolder title='create folder'>+<img src=/lib/icons/folder.png></a>
+  <a class="item right" id=settings title=settings href={{=file.path|uri}}?plug=meta>
+    <img src=/lib/icons/settings.png>
+  </a>
+  <!-- <a class="item right" id=upload title='upload files'><img src=/lib/icons/cloud_up.png></a> -->
+  <hr class=clear>
 </form>
 
-<ul id=fuzzy>{{-
-  files|file|i;
-  <li>
-      <div class=cursor>
-          &{{?i==0|#9654;nbsp}};
-      </div>
-      <a href={{=file.path|uri|xmlattr}}>{{=file.name|html}}</a>
-  </li>}}
-</ul>
+<div id=filelist>{{-files|file|i;
+  <li class={{?file.type==='dir'|folder;file}}><a href={{=file.path|uri|xmlattr}}>{{=file.name|html}}</a>}}
+</div>
 
 <script src=/lib/js/scout.js?plug=none></script>
 <script src=/lib/js/gateway.js?plug=none></script>
