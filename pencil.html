@@ -65,8 +65,7 @@
     var socket = Scout.socket({{=file.path|json}}),
         mime = {{=
             file.meta.type? file.meta.type:
-            (lookup('types') && lookup('types')[extname])?
-            lookup('types')[extname]: 'text/plain' |json}} || 'text/plain',
+            lookup('types["' + extname + '"]') |json}} || 'text/plain',
         theme = {{=lookup('theme')|json}} || 'default',
         keymap = {{=lookup('keymap')|json}} || 'default',
         lineNumbers = {{=lookup('lineNumbers')|json}} || true,
