@@ -1,1 +1,1 @@
-{"type":"text/x-lisp"}
+{"type":"text/x-common-lisp"}
