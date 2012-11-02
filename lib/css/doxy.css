@@ -1,0 +1,62 @@
+html, body {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+#source, #preview {
+  height: 100%;
+  width: 50%;
+  border: 0px;
+  outline: 0px;
+  float: left;
+  overflow: auto
+}
+
+#preview {
+    margin: 0px;
+
+    font: Helvetica, Georgia, Arial, serif;
+    color: black;
+
+    background-image: linear-gradient(bottom, rgb(255,255,255) 0%, rgb(191,191,191) 50%, rgb(255,255,255) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(191,191,191) 50%, rgb(255,255,255) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(191,191,191) 50%, rgb(255,255,255) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(191,191,191) 50%, rgb(255,255,255) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(191,191,191) 50%, rgb(255,255,255) 100%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(255,255,255)),
+        color-stop(0.5, rgb(191,191,191)),
+        color-stop(1, rgb(255,255,255))
+    );
+}
+
+#preview a {
+    color: #4F4B4F;
+    text-decoration: none;
+}
+
+#preview a:hover {
+    color: #554300;
+    text-decoration: none;
+    transition: color 200ms ease 0s; /* thanks isBullsh.it! */
+}
+
+#preview h1, #preview h3, #preview p {
+    text-shadow: -1px 1px 0 white;
+    margin: 0px;
+}
+
+#preview > ul {
+    list-style: none;
+}
+
+#preview > .backtotop {
+    font-size: 0.8em;
+}
