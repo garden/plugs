@@ -1,4 +1,3 @@
-
 pre {
   margin: 0px;
 }
@@ -9,6 +8,12 @@ pre {
   left: 0px;
   width: 100%;
   margin: 0px;
+}
+
+#chan, #nick {
+  width: 100px;
+  height: 10px;
+  margin-bottom: 0px;
 }
 
 #message {
@@ -26,4 +31,3 @@ pre {
   right: 1px;
   margin: 0px;
 }
-

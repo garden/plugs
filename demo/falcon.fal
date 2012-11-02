@@ -1,0 +1,5 @@
+x = int(input()) 
+while x != 42
+  printl(x)
+  x = int(input())
+end

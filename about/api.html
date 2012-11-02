@@ -1,0 +1,50 @@
+<!doctype html>
+<meta charset="utf-8">
+<title> File System API </title>
+
+<style>
+  html { font-family: monospace; }
+  span.info { color: #aaa; }
+  form, pre { float: left; }
+</style>
+
+<form id=api action='javascript:void 0'>
+  <h1> File System API </h1>
+
+  <p> op <span class=info> (e.g. "read", "create", "rm", "mount") </span> <br>
+  <input id=op type=text>
+
+  <p> path <span class=info> (e.g. "/about/api.html") </span> <br>
+  <input id=path type=text>
+
+  <p> depth <span class=info> (optional, use with "read") </span> <br>
+  <input id=depth type=number>
+
+  <p> type  <span class=info> (e.g. "folder", use with "create") </span> <br>
+  <input id=type type=text>
+
+  <p> name  <span class=info> (use with "create") </span> <br>
+  <input id=name type=text>
+
+  <p> <input type=submit value=send>
+</form>
+
+<pre id=out></pre>
+
+<script src=/lib/js/scout.js></script>
+<script>
+  Scout('#api').on('submit', function(query) {
+    query.action = 'fs';
+    query.data = {
+      op: Scout('#op').value,
+      path: Scout('#path').value,
+      depth: Scout('#depth').value,
+      type: Scout('#type').value,
+      name: Scout('#name').value
+    };
+    query.resp = function(data) {
+      Scout('#out').textContent = data ? JSON.stringify(data, null, 2) : '(no data received)';
+    };
+  });
+
+</script>

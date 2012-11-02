@@ -1,12 +1,58 @@
 <!doctype html>
 <meta charset=utf-8>
-<title> {{=title|html}}  </title>
+<title> Metadata of {{=title|html}}  </title>
 
-<div id=show></div>
+<style>
+  html body { font-family: monospace; margin-top: 3em; }
+  p#saved { visibility: hidden; }
+  div#show { margin-bottom: 13px; }
+  p#info {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 5px;
+    background: white;
+    box-shadow: 0px 0px 10px #eee;
+  }
+</style>
 
-<script src='/lib/js/webjson.js?plug=none'></script>
+<p id=info> Click on an item to edit it.
+Then <button class=shown id=save> Save </button>. <span id=saved></span></p>
+
+<div class='webjson-element' id=show></div>
+
+<script src='/lib/js/webjson.js'></script>
+<script src='/lib/js/scout.js'></script>
 
 <script>
-  JSON.web( {{=file.meta|json}},
-  'show', {template: 'editable'});
+onload = function() {
+  JSON.web({{=file.meta|json}},
+  'show', {template: 'rewrite'});
+
+  var save = Scout('#save'),
+      saved = Scout('#saved');
+
+  save.on('click', function(param) {
+    save.disabled = true;
+    saved.textContent = 'Saving…';
+    saved.style.visibility = 'visible';
+
+    param.action = 'meta-save';
+    param.data = {path:"{{=file.path|jsonstring}}", meta:JSON.getweb.show};
+    param.resp = function(resp) {
+      if (!resp.err) {
+        save.disabled = false;
+        saved.textContent = 'Saved!';
+        setTimeout(function () {
+          saved.style.visibility = 'hidden';
+        }, 1000);
+      }
+    };
+  });
+};
 </script>
+
+<!-- Google Analytics -->
+<script>var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-27876347-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})()</script>

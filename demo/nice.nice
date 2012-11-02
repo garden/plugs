@@ -1,0 +1,6 @@
+void main (String[] args)
+{
+  java.io.BufferedReader r = new java.io.BufferedReader (new java.io.InputStreamReader (System.in));
+  String s;
+  while (!(s=notNull(r.readLine())).startsWith("42")) System.out.println(s);
+}

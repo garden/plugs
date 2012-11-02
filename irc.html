@@ -3,28 +3,75 @@
 <meta name=viewport content='width=device-width'>
 <title> {{=title|html}} </title>
 
-<link rel=stylesheet href=/lib/css/common.css?plug=none>
+<link rel=stylesheet href=/lib/css/ui.css?plug=none>
 <link rel=stylesheet href=/lib/css/irc.css?plug=none>
 
-<div id='toolbar' class='CodeMirror-gutter'>
-  <nav id="location-zone">
+<div id=toolbar class=CodeMirror-gutter>
+  <nav id=location-zone>
     <div id=crumbs>{{-
       nav|crumb|i;
       <a href={{=crumb.path|uri}} class="crumb{{? i == 0; root-crumb}}">{{=crumb.name|html}}</a>}}
     </div>
   </nav>
-  <div id="controls-zone">
-    <div class=btn-group>
-      <a class=btn title=settings
-        href='{{=file.path|uri}}?plug=meta'>&#9881;</a>
-    </div>
+  <div id=controls-zone class=btn-group>
+    <a class=btn id=settings title=settings href={{=file.path|uri}}?plug=meta>
+      <img src=/lib/icons/cogwheel.png>
+    </a>
   </div>
 </div>
+
+<div class=panel><ul>
+  <input type=hidden id=serv title=serv value={{=lookup('serv')|html}}>
+  <li><input type=text id=chan title=chan value={{=lookup('chan')|html}}>
+  <li><input type=text id=nick title=nick value={{=lookup('nick')|html}}>
+</ul></div>
 
 <pre>{{=file.content|html}}</pre>
 
 <form autocomplete=off id=input class=input-append>
-  <input type=text id=message placeholder=message>
+  <input type=text id=message placeholder=say…>
   <input type=submit id=submit value=&#9654; class=btn>
 </form>
 
+<script src=/lib/js/scout.js?plug=none></script>
+<script>
+  (function() {
+    // UI elements
+    var serv = Scout('#serv'),
+        chan = Scout('#chan'),
+        nick = Scout('#nick'),
+        message = Scout('#message'),
+        submit = Scout('#submit'),
+        input = Scout('#input');
+
+    if (serv.value === '') serv.value = 'chat.freenode.net';
+    if (chan.value === '') chan.value = '#tree';
+    if (nick.value === '') nick.value = 'guest';
+
+    // Say hello to the server
+    Scout.send(function(query) {
+      query.action = 'join';
+      query.data = {
+        path: {{=file.path|json}},
+        serv: serv.value,
+        nick: nick.value,
+        chan: chan.value,
+      };
+    })();
+
+    // Send messages to the server
+    input.on('submit', function (query) {
+      query.action = 'say';
+      query.data = {
+        path: {{=file.path|json}},
+        serv: serv.value,
+        nick: nick.value,
+        chan: chan.value,
+        message: message.value
+      };
+      message.value = '';
+    });
+
+
+  })();
+</script>
