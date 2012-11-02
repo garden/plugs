@@ -15,7 +15,8 @@
       preview = document.getElementById('preview');
 
   source.contentWindow.addEventListener('message', function(event) {
-      preview.innerHTML = generateDoc( event.data );
+      var doc = new Doxygen( event.data );
+      preview.innerHTML = doc.content();
   });
 </script>
 
