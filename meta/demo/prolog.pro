@@ -1,1 +1,1 @@
-{"type":"text"}
+{"type":"text/x-prolog"}
