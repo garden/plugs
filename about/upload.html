@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8">
+<title> uploader </title>
+
+<style>
+  html { font-family: monospace; }
+  span.info { color: #aaa; }
+  form, pre { float: left; }
+</style>
+
+<form action="/$upload" enctype="multipart/form-data" method="post" target="uploader">
+  <h1> Multi-file uploader </h1>
+
+  <p> destination <span class=info> (e.g. "/about/") </span> <br>
+  <input name="path" type="text">
+
+  <p> files  <span class=info> (as many as you wish) </span> <br>
+  <input name="upload" type="file" multiple="multiple">
+
+  <p> <input type="submit" value="submit">
+</form>
+
+<iframe id="uploader"></iframe>
