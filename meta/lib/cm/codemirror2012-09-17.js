@@ -1,1 +1,1 @@
-{"type":"text/javascript"}
+{"type":"text/javascript","plug":"none"}

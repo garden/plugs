@@ -18,7 +18,7 @@ begin
   else 
     writeln('Condition not met');
    
-  for i := 1 to 10 do 
+  for i := 1 to 10 do
     writeln('Iteration: ', i:1);
    
   repeat
