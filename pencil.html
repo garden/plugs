@@ -15,7 +15,7 @@
 
 <form id=toolbar name=export method=post target=_blank enctype=multipart/form-data>{{-
   nav|crumb|i;
-  <a href={{=crumb.path|uri}} class="item{{? i == 0; root-crumb}}">{{=crumb.name|html}}</a>}}
+    <a href={{=crumb.path|uri}} class="item crumb{{? i == 0; root-crumb}}">{{=crumb.name.replace(/\\/$/, '')|html}}</a>}}
   <a class=item id=preview title=preview><img src=/lib/icons/eye_open.png></a>
   <a class=item id=validate title=validate><img src=/lib/icons/ok_2.png></a>
   <a class=item id=run title=run><img src=/lib/icons/play.png></a>
@@ -33,7 +33,6 @@
   <input type=hidden name=ucn_text_mime>
   <input type=hidden name=ucn_task value=conformance>
   <input type=hidden name=run value=True>
-  <hr class=clear>
 </form>
 
 <div id=wrapper class=panel></div>
