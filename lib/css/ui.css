@@ -3,65 +3,123 @@
 /* HTML5 resets */
 
 html, body {
-  margin: 0px;
+  margin: 0;
   height: 100%;
   z-index: -10;
   overflow: auto !important;
 }
 
-input[type="search"] {
-  box-sizing: initial;
+#search[type="search"] {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 0px;
 }
 
 /* Awesome toolbar */
 
 #toolbar {
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  background-color: #f5f5f5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
   font-size: 16px;
+  line-height: 16px;
+  padding: 0 4px 0 0;
+  position: relative;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+  z-index: 20;
+}
+.gateway #toolbar {
+  background: -moz-linear-gradient(left, white 0%, white 450px, #f9f9f9 750px); /* FF3.6+ */
+  background: -webkit-linear-gradient(left, white 0%, white 450px, #f9f9f9 750px); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, white 0%, white 450px, #f9f9f9 750px); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, white 0%, white 450px, #f9f9f9 750px); /* IE10+ */
+  background: linear-gradient(to right, white 0%, white 450px, #f9f9f9 750px); /* W3C */
 }
 #toolbar a, #toolbar input, #toolbar select {
   display: inline-block;
-  line-height: 29px;
+  line-height: 30px;
   padding: 0 1px;
   /* border: 0px; */
   color: #444;
-  opacity: 0.6;
   font-family: "Ubuntu Mono", monospace;
-  /* background-color: transparent; */
+  background-color: transparent;
   cursor: pointer;
   vertical-align: top;
   text-decoration: none;
 }
+#toolbar .item {
+  float: left;
+  padding-right: 5px;
+  padding-left: 5px;
+  opacity: 0.6;
+}
+#toolbar .crumb {
+  padding: 0;
+  position: relative;
+  min-height: 30px;
+  background: transparent;
+  z-index: 0;
+  margin-right: 23px;
+  opacity: 1;
+}
+#toolbar .crumb:after {
+  content: "";
+  background-color: #f5f5f5;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: -10px;
+  z-index: -1;
+  -webkit-transform: skewX(-30deg);
+  transform: skewX(-30deg);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-left: 1px solid rgba(255,255,255,0.7);
+  border-right: 2px solid rgba(0,0,0,0.08);
+}
+#toolbar .crumb:hover:after {
+  background-color: #fafafa;
+}
 #toolbar .item:hover, #toolbar .item:focus {
-  opacity: 1; 
+  opacity: 1;
 }
 #toolbar .right {
   float: right;
 }
-.clear {
+#toolbar:after {
+  content: "";
   clear: both;
-  margin: 0px;
-  border: 0px;
+  display: block;
 }
 
 /* specific toolbar elements */
 
 #toolbar .root-crumb {
-  padding-left: 20px;
-  opacity: 0.8;
-  background: url(/lib/img/TheFileIcon.png) no-repeat 0 3px;
+  padding-left: 6px;
+  min-width: 6px;
+  display: inline-block;
 }
-#toolbar input[type="search"] {
-  margin-top: 3px;
-  height: 14px;
+#toolbar .root-crumb:before {
+  content: "";
+  background: url(/lib/img/TheFileIcon.png) no-repeat 0 center;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: -4px;
+}
+#search[type="search"] {
   width: 190px;
-  padding: 3px;
-  border: 1px solid #ccc;
+  padding: 0;
+  border: 0 none;
   border-radius: 2px;
   font-size: 16px;
+  background-color: white;
+  line-height: 16px;
+  margin-top: 5px;
+  display: block;
 }
-#toolbar input[type="search"]:focus, #toolbar input[type="search"]:hover {
+#search[type="search"]:focus, #search[type="search"]:hover {
   outline: 0;
   opacity: 1;
   /* border-color: #9fbddf; */
@@ -69,7 +127,7 @@ input[type="search"] {
 #toolbar select {
   margin-top: 4px;
   height: 20px;
-  padding: 0px;
+  padding: 0;
   font-size: 16px;
 }
 #toolbar img {
@@ -124,10 +182,6 @@ input[type="search"] {
   overflow-y: auto;
   height: auto;
   width: 100%;
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
-  -ms-box-shadow: none !important;
-  -o-box-shadow: none !important;
   box-shadow: none !important;
 }
 .panel ul {
@@ -151,8 +205,7 @@ input[type="search"] {
   position: absolute
 }
 .other-client pre {
-  border-left-width: 2px;
-  border-left-style: solid;
+  border-left: 2px solid;
   position: absolute;
   bottom: 100%
 }
@@ -164,6 +217,6 @@ input[type="search"] {
 }
 #background .CodeMirror-lines {
   height: 100%;
-  width: 100%
+  width: 100%;
   z-index: -28;
 }

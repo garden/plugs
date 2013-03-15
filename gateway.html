@@ -5,16 +5,16 @@
 
 <link rel=stylesheet href=/lib/css/ui.css>
 
+<body class=gateway>
 <form id=toolbar action=javascript:void(0) autocomplete=off>{{-nav|crumb|i;
-  <a href={{=crumb.path|uri}} class="item{{? i == 0; root-crumb}}">{{=crumb.name|html}}</a>}}
-  <input id=search type=search placeholder=search… autofocus>
+  <a href={{=crumb.path|uri}} class="item crumb{{? i == 0; root-crumb}}">{{=crumb.name.replace(/\\/$/, '')|html}}</a>}}
+  <input id=search type=search placeholder=search… class=item autofocus>
   <a class=item id=newfile title='create file'>+<img src=/lib/icons/file_lines.png></a>
   <a class=item id=newfolder title='create folder'>+<img src=/lib/icons/folder.png></a>
   <a class="item right" id=settings title=settings href={{=file.path|uri}}?plug=meta>
     <img src=/lib/icons/settings.png>
   </a>
   <!-- <a class="item right" id=upload title='upload files'><img src=/lib/icons/cloud_up.png></a> -->
-  <hr class=clear>
 </form>
 
 <div id=filelist>{{-files|file|i;
