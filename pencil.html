@@ -3,10 +3,8 @@
 <meta name=viewport content='width=device-width'>
 <title> {{=title|html}} </title>
 
-<link rel=stylesheet href=/lib/cm/codemirror2012-09-17.css>
+<link rel=stylesheet href=/lib/cm/cm2013-05-23.css>
 <link rel=stylesheet href=/lib/css/ui.css>
-
-<body class=CodeMirror>
 
 <div id=background class="cm-s-default CodeMirror-scroll">
   <div class=CodeMirror-gutter></div>
@@ -40,7 +38,7 @@
 <base target=_parent>
 
 <script src=/$socket.io/socket.io.js></script>
-<script src=/lib/cm/codemirror2012-09-17.js></script>
+<script src=/lib/cm/cm2013-05-23.js></script>
 <script src=/lib/js/scout.js></script>
 <script src=/lib/js/ot-min.js></script>
 <script src=/lib/js/pencil.js></script>
@@ -81,12 +79,19 @@
       autofocus: true,
       theme: theme,
       keyMap: keymap,
-      onChange: onChange
+      onChange: onChange,
+      readonly: 'nocursor'  // It'll be writable when the connection is set up.
     });
 
     // Operational Transformation
-    var cmClient = new ot.CodeMirrorClient(socket, cm);
-    wrapper.appendChild(cmClient.clientListEl);
+    socket.emit('login', { name: 'foo' }).on('logged_in', function() {
+      cm.setOption('readonly', false);
+    });
+    socket.on('doc', function(obj) {
+      var cmClient = new ot.EditorClient(obj.revision, obj.clients,
+          new ot.SocketIOAdapter(socket), new ot.CodeMirrorAdapter(cm));
+      wrapper.appendChild(cmClient.clientListEl);
+    });
 
     // codeMirrorClient.onCodeMirrorCursorActivity()
     cm.setCursor({line:0,ch:0});

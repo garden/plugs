@@ -13,13 +13,15 @@ update:
 	@cp -rf mirror/README.md .
 	@echo "[js] concatenating..."
 	@cat mirror/lib/codemirror.js > $(JSFILE)
-	@for util in closetag foldcode formatting javascript-hint overlay \
-	simple-hint xml-hint ; do \
-	  cat mirror/lib/util/$$util.js >> $(JSFILE); \
+	@for util in closetag foldcode javascript-hint overlay \
+	show-hint xml-hint ; do \
+	  cat mirror/addon/*/$$util.js >> $(JSFILE); \
 	done
 	@mv mirror/mode/rpm/* mirror/mode && rmdir mirror/mode/rpm
 	@for mode in `ls mirror/mode`; do \
-	  cat mirror/mode/$$mode/$$mode.js >> $(JSFILE); \
+	  if [ $$mode != meta.js ]; then \
+	    cat mirror/mode/$$mode/$$mode.js >> $(JSFILE); \
+	  fi \
 	done
 	@cat mirror/keymap/*.js >> $(JSFILE)
 	@echo "[js] compressing..."
@@ -27,7 +29,7 @@ update:
 	@echo "[js] created $(JSFILE)"
 	@echo "[css] concatenating..."
 	@cat mirror/lib/*.css > $(CSSFILE)
-	@cat mirror/lib/util/simple-hint.css >> $(CSSFILE)
+	@cat mirror/addon/hint/show-hint.css >> $(CSSFILE)
 	@cat mirror/theme/*.css >> $(CSSFILE)
 	@echo "[css] compressing..."
 	@cat $(CSSFILE) | $(CSSMIN) > $(CSSFILE).min && mv $(CSSFILE).min $(CSSFILE)

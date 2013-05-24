@@ -179,12 +179,19 @@ html, body {
 
 /* Pencil editor */
 
+.CodeMirror {
+  border-top: 0;
+  border-bottom: 0;
+  height: 100%;
+}
 .CodeMirror-scroll {
   overflow-x: hidden;
   overflow-y: auto;
-  height: auto;
-  width: 100%;
+  height: calc(100% - 31px);
   box-shadow: none !important;
+}
+.panel {
+  height: calc(100% - 31px);
 }
 .panel ul {
   position: fixed;
@@ -213,7 +220,6 @@ html, body {
 }
 #background {
   position: absolute;
-  height: 100%;
   overflow: hidden;
   z-index: -26;
 }
