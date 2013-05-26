@@ -23,7 +23,6 @@ html, body {
   background-color: #f9f9f9;
   font-size: 16px;
   line-height: 16px;
-  width: 100%;
   padding: 0 4px 0 0;
   position: fixed;
   left: 4em;
@@ -149,10 +148,6 @@ html, body {
   overflow: auto;
   position: relative;
   top: 0;
-}
-#filelist:hover {
-  background-color: white;
-  z-index: 30;
 }
 #filelist:hover {
   background-color: white;
