@@ -23,6 +23,7 @@ html, body {
   background-color: #f9f9f9;
   font-size: 16px;
   line-height: 16px;
+  width: 100%;
   padding: 0 4px 0 0;
   position: fixed;
   box-shadow: 0 2px 2px rgba(0,0,0,0.1);
@@ -179,12 +180,21 @@ html, body {
 
 /* Pencil editor */
 
+.CodeMirror {
+  border-top: 0;
+  border-bottom: 0;
+  height: 100%;
+}
 .CodeMirror-scroll {
   overflow-x: hidden;
   overflow-y: auto;
-  height: auto;
-  width: 100%;
+  height: calc(100% - 31px);
+  top: 31px;
+  padding-bottom: 0;
   box-shadow: none !important;
+}
+.panel {
+  height: 100%;
 }
 .panel ul {
   position: fixed;
@@ -213,7 +223,6 @@ html, body {
 }
 #background {
   position: absolute;
-  height: 100%;
   overflow: hidden;
   z-index: -26;
 }
