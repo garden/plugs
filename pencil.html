@@ -56,7 +56,7 @@
 
     // Template information
     var socket = Scout.socket({{=file.path|json}}),
-        path = '{{=file.path|uri}}',
+        path = "{{=file.path|uri}}",
         mime = {{=
             file.meta.type? file.meta.type:
             lookup('types["' + extname + '"]') |json}} || 'text/plain',

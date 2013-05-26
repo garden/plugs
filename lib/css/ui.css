@@ -22,11 +22,11 @@ html, body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   background-color: #f9f9f9;
   font-size: 16px;
-  left: 0;
   line-height: 16px;
   width: 100%;
   padding: 0 4px 0 0;
   position: fixed;
+  left: 4em;
   right: 0;
   box-shadow: 0 2px 2px rgba(0,0,0,0.1);
   z-index: 20;
@@ -148,7 +148,11 @@ html, body {
 #filelist {
   overflow: auto;
   position: relative;
-  top: 2em;
+  top: 0;
+}
+#filelist:hover {
+  background-color: white;
+  z-index: 30;
 }
 #filelist:hover {
   background-color: white;
@@ -191,7 +195,7 @@ html, body {
   border-bottom: 0;
   height: 100%;
 }
-.CodeMirror-scroll:hover {
+.CodeMirror:hover {
   background-color: white;
   z-index: 30;
 }
