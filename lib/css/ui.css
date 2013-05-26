@@ -197,8 +197,7 @@ html, body {
 .CodeMirror-scroll {
   overflow-x: hidden;
   overflow-y: auto;
-  height: calc(100% - 31px);
-  top: 31px;
+  height: auto;
   padding-bottom: 0;
   box-shadow: none !important;
 }
