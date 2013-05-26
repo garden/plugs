@@ -22,10 +22,12 @@ html, body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   background-color: #f9f9f9;
   font-size: 16px;
+  left: 0;
   line-height: 16px;
   width: 100%;
   padding: 0 4px 0 0;
   position: fixed;
+  right: 0;
   box-shadow: 0 2px 2px rgba(0,0,0,0.1);
   z-index: 20;
 }
@@ -148,6 +150,10 @@ html, body {
   position: relative;
   top: 2em;
 }
+#filelist:hover {
+  background-color: white;
+  z-index: 30;
+}
 #filelist li {
   padding: 5px;
   padding-left: 25px;
@@ -158,12 +164,12 @@ html, body {
 }
 #filelist li.file {
   background-image: url("/lib/icons/file_lines.png");
-  background-position: 7px 7px;;
+  background-position: 7px 7px;
   background-size: 12px;
 }
 #filelist li.folder {
   background-image: url("/lib/icons/folder_blue.png");
-  background-position: 7px 8px;;
+  background-position: 7px 8px;
   background-size: 15px;
 }
 #filelist li a {
