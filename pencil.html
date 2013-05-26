@@ -79,9 +79,10 @@
       autofocus: true,
       theme: theme,
       keyMap: keymap,
-      onChange: onChange,
       readonly: 'nocursor'  // It'll be writable when the connection is set up.
     });
+    cm.on('change', onChange);
+    onChange();     // Send the initial value.
 
     // Operational Transformation
     socket.emit('login', { name: 'foo' }).on('logged_in', function() {
