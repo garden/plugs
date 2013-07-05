@@ -13,7 +13,7 @@
 
 <form id=toolbar name=export method=post target=_blank enctype=multipart/form-data>{{-
   nav|crumb|i;
-    <a href={{=crumb.path|uri}} class="item crumb{{? i == 0; root-crumb}}">{{=crumb.name.replace(/\\/$/, '')|html}}</a>}}
+    <a href='{{=crumb.path|uri|xmlattr}}' class="item crumb{{? i == 0; root-crumb}}">{{=crumb.name.replace(/\\/$/, '')|html}}</a>}}
   <a class=item id=preview title=preview><img src=/lib/icons/eye_open.png></a>
   <a class=item id=validate title=validate><img src=/lib/icons/ok_2.png></a>
   <a class=item id=run title=run><img src=/lib/icons/play.png></a>
@@ -55,8 +55,8 @@
         wrapper = Scout('#wrapper'), delay;
 
     // Template information
-    var socket = Scout.socket({{=file.path|json}}),
-        path = '{{=file.path|uri}}',
+    var path = {{=file.path|json}},
+        socket = Scout.socket(path),
         mime = {{=
             file.meta.type? file.meta.type:
             lookup('types["' + extname + '"]') |json}} || 'text/plain',
