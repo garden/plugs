@@ -7,12 +7,12 @@
 
 <body class=gateway>
 <form id=toolbar action=javascript:void(0) autocomplete=off>{{-nav|crumb|i;
-  <a href='{{=crumb.path|uri|xmlattr}}' class="item crumb{{? i == 0; root-crumb}}">{{=crumb.name.replace(/\\/$/, '')|html}}</a>}}
+  <a href='{{=crumb.path|path|xmlattr}}' class="item crumb{{? i == 0; root-crumb}}">{{=crumb.name.replace(/\\/$/, '')|html}}</a>}}
   <input id=search type=search placeholder=search… class=item autofocus>
   <a class=item id=newfile title='create file'>+<img src=/lib/icons/file_lines.png></a>
   <a class=item id=newfolder title='create folder'>+<img src=/lib/icons/folder.png></a>
   <a class="item right" id=settings title=settings
-    href='{{=file.path|uri|xmlattr}}?plug=meta'>
+    href='{{=file.path|path|xmlattr}}?plug=meta'>
     <img src=/lib/icons/settings.png>
   </a>
   <!-- <a class="item right" id=upload title='upload files'><img src=/lib/icons/cloud_up.png></a> -->
@@ -20,7 +20,7 @@
 
 <div id=filelist>{{-files|file|i;
   <li class={{?file.type==='dir'|folder;file}}><a
-    href='{{=file.path|uri|xmlattr}}'>{{=file.name|html}}</a>}}
+    href='{{=file.path|path|xmlattr}}'>{{=file.name|html}}</a>}}
 </div>
 
 <script src=/lib/js/scout.js></script>

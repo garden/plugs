@@ -13,7 +13,7 @@
 
 <form id=toolbar name=export method=post target=_blank enctype=multipart/form-data>{{-
   nav|crumb|i;
-    <a href='{{=crumb.path|uri|xmlattr}}' class="item crumb{{? i == 0; root-crumb}}">{{=crumb.name.replace(/\\/$/, '')|html}}</a>}}
+    <a href='{{=crumb.path|path|xmlattr}}' class="item crumb{{? i == 0; root-crumb}}">{{=crumb.name.replace(/\\/$/, '')|html}}</a>}}
   <a class=item id=preview title=preview><img src=/lib/icons/eye_open.png></a>
   <a class=item id=validate title=validate><img src=/lib/icons/ok_2.png></a>
   <a class=item id=run title=run><img src=/lib/icons/play.png></a>
@@ -55,15 +55,15 @@
         wrapper = Scout('#wrapper'), delay;
 
     // Template information
-    var path = {{=file.path|json}},
+    var path = {{=file.path|json|script}},
         socket = Scout.socket(path),
         mime = {{=
             file.meta.type? file.meta.type:
-            lookup('types["' + extname + '"]') |json}} || 'text/plain',
-        theme = {{=lookup('theme')|json}} || 'default',
-        keymap = {{=lookup('keymap')|json}} || 'default',
-        lineNumbers = {{=lookup('lineNumbers')|json}} || true,
-        lineWrapping = {{=lookup('lineWrapping')|json}} || true;
+            lookup('types["' + extname + '"]') |json|script}} || 'text/plain',
+        theme = {{=lookup('theme')|json|script}} || 'default',
+        keymap = {{=lookup('keymap')|json|script}} || 'default',
+        lineNumbers = {{=lookup('lineNumbers')|json|script}} || true,
+        lineWrapping = {{=lookup('lineWrapping')|json|script}} || true;
 
     // Update UI elements on content changes
     function onChange() {
