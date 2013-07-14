@@ -18,7 +18,8 @@
   <!-- <a class="item right" id=upload title='upload files'><img src=/lib/icons/cloud_up.png></a> -->
 </form>
 
-<div id=filelist>{{-files|file|i;
+<div id=filelist>{{-files.sort(function(f1, f2) { return f2.time - f1.time })
+  |file|i;
   <li class={{?file.type==='dir'|folder;file}}><a
     href='{{=file.path|path|xmlattr}}'>{{=file.name|html}}</a>}}
 </div>
