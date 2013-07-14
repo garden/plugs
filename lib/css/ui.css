@@ -158,12 +158,12 @@ html, body {
 }
 #filelist li.file {
   background-image: url("/lib/icons/file_lines.png");
-  background-position: 7px 7px;;
+  background-position: 7px 7px;
   background-size: 12px;
 }
 #filelist li.folder {
   background-image: url("/lib/icons/folder_blue.png");
-  background-position: 7px 8px;;
+  background-position: 7px 8px;
   background-size: 15px;
 }
 #filelist li a {

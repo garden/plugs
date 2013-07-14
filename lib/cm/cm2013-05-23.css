@@ -516,7 +516,7 @@ div.CodeMirror span.CodeMirror-matchingbracket { color: #7EFC7E; }/*65FC65*/
 
 /*<!--match-->*/
 span.CodeMirror-matchhighlight { background: #494949 }
-.CodeMirror-focused span.CodeMirror-matchhighlight { background: #314D67; !important }
+.CodeMirror-focused span.CodeMirror-matchhighlight { background: #314D67 !important; }
 
 /*<!--activeline-->*/
 .activeline {background: #253540 !important;}
