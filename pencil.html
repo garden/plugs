@@ -1,7 +1,7 @@
 <!doctype html>
 <meta charset=utf-8>
 <meta name=viewport content='width=device-width'>
-<title> {{=title|html}} </title>
+<title> {{= title in html}} </title>
 
 <link rel=stylesheet href=/lib/cm/cm2013-05-23.css>
 <link rel=stylesheet href=/lib/css/ui.css>
@@ -11,17 +11,22 @@
   <div class=CodeMirror-lines></div>
 </div>
 
-<form id=toolbar name=export method=post target=_blank enctype=multipart/form-data>{{-
-  nav|crumb|i;
-    <a href='{{=crumb.path|path|xmlattr}}' class="item crumb{{? i == 0; root-crumb}}">{{=crumb.name.replace(/\\/$/, '')|html}}</a>}}
+<form id=toolbar name=export method=post target=_blank
+  enctype=multipart/form-data>{{for i, crumb in nav {{
+  <a href='{{= crumb.path in path in xmlattr}}' class="item crumb {{
+    if i==0 then root-crumb
+  }}">{{= crumb.name.replace(/\/$/,'') in html}}</a>}}}}
   <a class=item id=preview title=preview><img src=/lib/icons/eye_open.png></a>
   <a class=item id=validate title=validate><img src=/lib/icons/ok_2.png></a>
   <a class=item id=run title=run><img src=/lib/icons/play.png></a>
   <a class="item right" id=settings title=settings><img src=/lib/icons/settings.png></a>
-  <select onchange=selectTheme(this) class="item right" id=theme title=theme>{{-
-    ['default','ambiance','blackboard','cobalt','eclipse','elegant','erlang-dark',
-     'lesser-dark','monokai','neat','night','rubyblue','vibrant-ink','xq-dark']|theme|i;
-    <option{{?theme===lookup('theme'); selected}}>{{=theme|html}}</option>}}
+  <select onchange=selectTheme(this) class="item right" id=theme
+    title=theme>{{for theme in {{
+    ['default','ambiance','blackboard','cobalt','eclipse','elegant',
+    'erlang-dark','lesser-dark','monokai','neat','night','rubyblue',
+    'vibrant-ink','xq-dark'] }}
+    {{
+   <option{{if theme===lookup('theme') then {{ selected}} }}>{{= theme in html}}</option>}} }}
   </select>
   <a class="item right" id=download title=download download><img src=/lib/icons/download_alt.png></a>
   <input type=hidden name=code>
@@ -55,15 +60,16 @@
         wrapper = Scout('#wrapper'), delay;
 
     // Template information
-    var path = {{=file.path|json|script}},
+    var path = {{= file.path in json in script}},
         socket = Scout.socket(path),
-        mime = {{=
-            file.meta.type? file.meta.type:
-            lookup('types["' + extname + '"]') |json|script}} || 'text/plain',
-        theme = {{=lookup('theme')|json|script}} || 'default',
-        keymap = {{=lookup('keymap')|json|script}} || 'default',
-        lineNumbers = {{=lookup('lineNumbers')|json|script}} || true,
-        lineWrapping = {{=lookup('lineWrapping')|json|script}} || true;
+        mime = {{= {{
+          file.meta.type? file.meta.type:
+          lookup('types["' + extname + '"]')
+        }} in json in script}} || 'text/plain',
+        theme = {{= lookup('theme') in json in script}} || 'default',
+        keymap = {{= lookup('keymap') in json in script}} || 'default',
+        lineNumbers = {{= lookup('lineNumbers') in json in script}} || true,
+        lineWrapping = {{= lookup('lineWrapping') in json in script}} || true;
 
     // Update UI elements on content changes
     function onChange() {
@@ -73,7 +79,7 @@
     // CodeMirror editor
     var cm = window.cm = CodeMirror(wrapper, {
       mode: mime,
-      value: {{=file.content|json|script}},
+      value: {{= file.content in json in script}},
       lineNumbers: lineNumbers,
       lineWrapping: lineWrapping,
       autofocus: true,
