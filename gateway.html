@@ -15,7 +15,13 @@
     href='{{=file.path|path|xmlattr}}?plug=meta'>
     <img src=/lib/icons/settings.png>
   </a>
-  <!-- <a class="item right" id=upload title='upload files'><img src=/lib/icons/cloud_up.png></a> -->
+  <a class="item right" id=upload title='upload files'><img src=/lib/icons/cloud_up.png></a>
+</form>
+
+<form id=upform action=/$upload enctype=multipart/form-data method=post target=uploader class=hidden>
+  <input name=path type=hidden>
+  <input name=upload type=file multiple=multiple>
+  <iframe id=uploader class=hidden></iframe>
 </form>
 
 <div id=filelist>{{-files.sort(function(f1, f2) { return f2.time - f1.time })
