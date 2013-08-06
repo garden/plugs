@@ -8,12 +8,14 @@ html, body {
   z-index: -10;
   overflow: auto !important;
 }
-
 #search[type="search"] {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   margin: 0px;
+}
+.hidden {
+  display: none !important;
 }
 
 /* Awesome toolbar */
@@ -94,7 +96,7 @@ html, body {
   display: block;
 }
 
-/* specific toolbar elements */
+/* Specific toolbar elements */
 
 #toolbar .root-crumb {
   padding-left: 6px;
