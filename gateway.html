@@ -21,7 +21,7 @@
 <form id=upform action=/$upload enctype=multipart/form-data method=post target=uploader class=hidden>
   <input name=path type=hidden>
   <input name=upload type=file multiple=multiple>
-  <iframe id=uploader class=hidden></iframe>
+  <iframe id=uploader name=uploader class=hidden></iframe>
 </form>
 
 <div id=filelist>{{-files.sort(function(f1, f2) { return f2.time - f1.time })
