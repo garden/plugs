@@ -1,1 +1,1 @@
-{"type":"text","Last-Modified":1354512648034}
+{"type":"text/plain","Last-Modified":1354512648034}
