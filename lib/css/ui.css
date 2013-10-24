@@ -139,7 +139,7 @@ html, body {
   padding-left: 3px;
   padding-right: 3px;
 }
-#toolbar #undo, #toolbar #redo, #toolbar #preview, #toolbar #validate, #toolbar #run {
+#toolbar #undo, #toolbar #redo, #toolbar #preview, #toolbar #validate, #toolbar #run, #toolbar #dictate {
   display: none;
 }
 
