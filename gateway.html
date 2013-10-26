@@ -28,9 +28,12 @@
 
 <div id=filelist>{{
   for file in {{files.sort(function(f1, f2) { return f2.time - f1.time })}} {{
-  <li class={{if file.type==='dir' then folder else file}}><a {{#
-    }}href='{{= file.path in path in xmlattr}}'>{{= file.name in html}}</a>}}}}
+  <li class={{if file.type==='dir' then folder else file}}><a {{
+    # We do not want the menu to appear upon selecting the file for editing.
+    }}onclick='event.stopPropagation()' href='{{=
+      file.path in path in xmlattr}}'>{{= file.name in html}}</a>}}}}
 </div>
+<div id=filemenu></div>
 
 <script src=/lib/js/scout.js></script>
 <script src=/lib/js/gateway.js></script>
