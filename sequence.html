@@ -13,16 +13,12 @@
 <script src=/lib/js/OpenSequenceDiagrams.js?plug=none></script>
 
 <script>
-  var source =  document.getElementById('source'),
-      error =  document.getElementById('error'),
-      preview = document.getElementById('preview');
+  var source = document.getElementById('source'),
+      error = document.getElementById('error');
 
   source.contentWindow.addEventListener('message', function(event) {
-	var schema = new Schema(),
-	    errorText = schema.parseLines(event.data);
+    var errorText = Sequence.parse(event.data, 'preview');
     error.innerHTML = errorText;
-    preview.innerHTML = schema.getSVG();
-
   });
 </script>
 
