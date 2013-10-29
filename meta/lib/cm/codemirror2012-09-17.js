@@ -1,1 +1,5 @@
-{"type":"text/javascript","plug":"none","Last-Modified":1357248960457}
+{
+  "type": "text/javascript",
+  "plug": "none",
+  "Last-Modified": 1357248960457
+}

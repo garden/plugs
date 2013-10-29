@@ -1,1 +1,4 @@
-{"type":"application/xquery","Last-Modified":1357260524876}
+{
+  "type": "application/xquery",
+  "Last-Modified": 1357260524876
+}

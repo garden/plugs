@@ -1,1 +1,4 @@
-{"type":"text/x-rst","Last-Modified":1357260524876}
+{
+  "type": "text/x-rst",
+  "Last-Modified": 1357260524876
+}

@@ -1,1 +1,4 @@
-{"type":"text/javascript","Last-Modified":1357256308408}
+{
+  "type": "text/javascript",
+  "Last-Modified": 1357256308408
+}
