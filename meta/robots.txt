@@ -1,1 +1,5 @@
-{"type":"text/plain","plug":"none","Last-Modified":1357248842265}
+{
+  "type": "text/plain",
+  "plug": "none",
+  "Last-Modified": 1357248842265
+}

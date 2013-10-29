@@ -1,1 +1,4 @@
-{"type":"text/x-markdown","Last-Modified":1360074446527}
+{
+  "type": "text/x-markdown",
+  "Last-Modified": 1360074446527
+}
