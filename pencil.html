@@ -6,9 +6,8 @@
 <link rel=stylesheet href=/lib/cm/cm2013-05-23.css>
 <link rel=stylesheet href=/lib/css/ui.css>
 
-<div id=background class="cm-s-default CodeMirror-scroll">
-  <div class=CodeMirror-gutter></div>
-  <div class=CodeMirror-lines></div>
+<div id=background class="CodeMirror cm-s-default">
+  <div class="CodeMirror-gutters CodeMirror-linenumber"></div>
 </div>
 
 <form id=toolbar name=export method=post target=_blank
@@ -86,6 +85,7 @@
       autofocus: true,
       theme: theme,
       keyMap: keymap,
+      viewportMargin: Infinity,
       readonly: 'nocursor'  // It'll be writable when the connection is set up.
     });
     cm.on('change', onChange);

@@ -26,8 +26,8 @@ html, body {
   font-size: 16px;
   line-height: 16px;
   width: 100%;
-  padding: 0 4px 0 0;
-  position: fixed;
+  /* padding: 0 4px 0 0; WTF? */
+  position: relative;
   box-shadow: 0 2px 2px rgba(0,0,0,0.1);
   z-index: 20;
 }
@@ -147,8 +147,6 @@ html, body {
 
 #filelist {
   overflow: auto;
-  position: relative;
-  top: 2em;
 }
 #filelist li {
   padding: 5px;
@@ -185,18 +183,15 @@ html, body {
 .CodeMirror {
   border-top: 0;
   border-bottom: 0;
-  height: 100%;
-}
-.CodeMirror-scroll {
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: calc(100% - 31px);
-  top: 31px;
-  padding-bottom: 0;
+  height: auto;
   box-shadow: none !important;
 }
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
 .panel {
-  height: 100%;
+  height: auto;
 }
 .panel ul {
   position: fixed;
@@ -225,11 +220,9 @@ html, body {
 }
 #background {
   position: absolute;
-  overflow: hidden;
-  z-index: -26;
-}
-#background .CodeMirror-lines {
   height: 100%;
   width: 100%;
-  z-index: -28;
+}
+#background .CodeMirror-gutters {
+  height: 100%;
 }
