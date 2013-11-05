@@ -182,9 +182,10 @@ html, body {
 #filemenu {
   position: absolute;
   display: none;
-  left: 25px;  /* See '#filelist li' padding left. */
   padding: 5px;
-  background: #f2f2f2;
+  background: white;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+  z-index: 21;  /* See #toolbar */
 }
 
 button.incrusted {
