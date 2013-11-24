@@ -142,6 +142,9 @@ html, body {
 #toolbar #undo, #toolbar #redo, #toolbar #preview, #toolbar #validate, #toolbar #run, #toolbar #dictate {
   display: none;
 }
+#toolbar>a.filemenu {
+  display: none;
+}
 
 /* Gateway file list */
 
@@ -154,19 +157,29 @@ html, body {
   padding: 5px;
   padding-left: 25px;
   list-style-type: none;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat, no-repeat;
   font-family: "Ubuntu Mono", monospace;
-  opacity: 0.7;
+}
+#filelist li.selected-file {
+  border-left: 4px solid #bbbbff;
 }
 #filelist li.file {
-  background-image: url("/lib/icons/file_lines.png");
-  background-position: 7px 7px;
-  background-size: 12px;
+  background: url("/lib/icons/file_lines.png") 7px 7px / 12px no-repeat scroll padding-box;
+}
+#filelist li.file:hover {
+  background: url("/lib/icons/file_lines.png") 7px 7px / 12px no-repeat scroll padding-box, linear-gradient(to right,#eef 0,rgba(255,255,255,0) 50px) 0 0 / 100% no-repeat scroll padding-box;
+}
+#filelist li.file.focus:hover {
+  background: url("/lib/icons/file_lines.png") 7px 7px / 12px no-repeat scroll padding-box, linear-gradient(to right,#e4e4ff 0,rgba(255,255,255,0) 50px) 0 0 / 100% no-repeat scroll padding-box, #f2f2f2;
 }
 #filelist li.folder {
-  background-image: url("/lib/icons/folder_blue.png");
-  background-position: 7px 8px;
-  background-size: 15px;
+  background: url("/lib/icons/folder_blue.png") 7px 8px / 15px no-repeat scroll padding-box;
+}
+#filelist li.folder:hover {
+  background: url("/lib/icons/folder_blue.png") 7px 8px / 15px no-repeat scroll padding-box, linear-gradient(to right,#eef 0,rgba(255,255,255,0) 50px) 0 0 / 100% no-repeat scroll padding-box;
+}
+#filelist li.folder.focus:hover {
+  background: url("/lib/icons/folder_blue.png") 7px 8px / 15px no-repeat scroll padding-box, linear-gradient(to right,#e4e4ff 0,rgba(255,255,255,0) 50px) 0 0 / 100% no-repeat scroll padding-box, #f2f2f2;
 }
 #filelist li a {
   color: #333;
@@ -177,15 +190,6 @@ html, body {
 }
 #filelist li.focus {
   background-color: #f2f2f2;
-  opacity: 1;
-}
-#filemenu {
-  position: absolute;
-  display: none;
-  padding: 5px;
-  background: white;
-  box-shadow: 0 3px 2px rgba(0,0,0,0.1);
-  z-index: 21;  /* See #toolbar */
 }
 
 button.incrusted {
