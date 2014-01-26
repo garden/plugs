@@ -86,14 +86,14 @@
       autofocus: true,
       theme: theme,
       keyMap: keymap,
-      readonly: 'nocursor'  // It'll be writable when the connection is set up.
+      readOnly: 'nocursor'  // It'll be writable when the connection is set up.
     });
     cm.on('change', onChange);
     onChange();     // Send the initial value.
 
     // Operational Transformation
     socket.emit('login', { name: 'foo' }).on('logged_in', function() {
-      cm.setOption('readonly', false);
+      cm.setOption('readOnly', false);
     });
     socket.on('doc', function(obj) {
       var cmClient = new ot.EditorClient(obj.revision, obj.clients,
