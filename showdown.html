@@ -1,13 +1,13 @@
 <!doctype html>
 <meta charset=utf-8>
-<title> {{=title|html}} </title>
+<title> {{= title in html}} </title>
 
 <body></body>
 
 <script src=/lib/js/showdown.js?plug=none></script>
 
 <script>
-  var text = {{=file.content|json|html}};
+  var text = {{= file.content in json in html}};
 
   var converter = new Showdown.converter();
   var html = converter.makeHtml(text);
