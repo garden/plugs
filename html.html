@@ -1,11 +1,11 @@
 <!doctype html>
 <meta charset=utf-8>
 <meta name=viewport content='width=device-width'>
-<title> {{=title|html}} </title>
+<title> {{= title in html}} </title>
 
 <link rel=stylesheet href=/lib/css/preview.css?plug=none>
 
-<iframe id=source src="{{=file.path|path|xmlattr}}?plug=pencil"></iframe>
+<iframe id=source src="{{= file.path in path in xmlattr}}?plug=pencil"></iframe>
 <iframe id=preview></iframe>
 
 <script>
