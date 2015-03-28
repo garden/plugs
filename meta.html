@@ -1,6 +1,6 @@
 <!doctype html>
 <meta charset=utf-8>
-<title> Metadata of {{=title|html}}  </title>
+<title> Metadata of {{= title in html}}  </title>
 
 <style>
   html body { font-family: monospace; margin-top: 3em; }
@@ -28,7 +28,7 @@ Then <button class=shown id=save> Save </button>. <span id=saved></span></p>
 
 <script>
 onload = function() {
-  JSON.web({{=file.meta|json}},
+  JSON.web({{= file.meta in json}},
   'show', {template: 'rewrite'});
 
   var save = Scout('#save'),
@@ -40,7 +40,7 @@ onload = function() {
     saved.style.visibility = 'visible';
 
     param.action = 'meta-save';
-    param.data = {path:"{{=file.path|jsonstring}}", meta:JSON.getweb.show};
+    param.data = {path:"{{= file.path in jsonstring}}", meta:JSON.getweb.show};
     param.resp = function(resp) {
       if (!resp.err) {
         save.disabled = false;
