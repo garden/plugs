@@ -1,29 +1,31 @@
 <!doctype html>
 <meta charset=utf-8>
 <meta name=viewport content='width=device-width'>
-<title> {{=title|html}} </title>
+<title> {{= title in html}} </title>
 
 <link rel=stylesheet href=/lib/css/ui.css?plug=none>
 <link rel=stylesheet href=/lib/css/irc.css?plug=none>
 
 <div id=toolbar class=CodeMirror-gutter>
   <nav id=location-zone>
-    <div id=crumbs>{{-
-      nav|crumb|i;
-      <a href={{=crumb.path|uri}} class="crumb{{? i == 0; root-crumb}}">{{=crumb.name|html}}</a>}}
+    <div id=crumbs>
+      {{for i, crumb in nav {{
+        <a href='{{= crumb.path in path in xmlattr}}' class="item crumb {{
+          if i==0 then root-crumb
+        }}">{{= crumb.name.replace(/\/$/,'') in html}}</a>}}}}
     </div>
   </nav>
   <div id=controls-zone class=btn-group>
-    <a class=btn id=settings title=settings href={{=file.path|uri}}?plug=meta>
+    <a class=btn id=settings title=settings href={{= file.path in uri}}?plug=meta>
       <img src=/lib/icons/cogwheel.png>
     </a>
   </div>
 </div>
 
 <div class=panel><ul>
-  <input type=hidden id=serv title=serv value={{=lookup('serv')|html}}>
-  <li><input type=text id=chan title=chan value={{=lookup('chan')|html}}>
-  <li><input type=text id=nick title=nick value={{=lookup('nick')|html}}>
+  <input type=hidden id=serv title=serv value={{= lookup('serv') in html}}>
+  <li><input type=text id=chan title=chan value={{= lookup('chan') in html}}>
+  <li><input type=text id=nick title=nick value={{= lookup('nick') in html}}>
 </ul></div>
 
 <pre>{{=file.content|html}}</pre>
