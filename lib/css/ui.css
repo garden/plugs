@@ -105,11 +105,14 @@ html, body {
 }
 #toolbar .root-crumb:before {
   content: "";
-  background: url(/lib/img/TheFileIcon.png) no-repeat 0 center;
+  background: url(/lib/img/TheFileIcon.svg) no-repeat 0 center;
+  background-size: 20px 20px;
   display: inline-block;
   width: 20px;
   height: 20px;
   vertical-align: -4px;
+  position: relative;
+  left: 2px;
 }
 #search[type="search"] {
   width: 190px;
