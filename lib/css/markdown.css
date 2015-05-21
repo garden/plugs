@@ -1,0 +1,18 @@
+html { font-family: sans-serif; }
+blockquote {
+  border-left: 4px solid lightgray;
+  margin-left: 0;
+  padding-left: 15px;
+  border-radius: 3px;
+}
+pre, code { font-family: monospace; }
+pre {
+  padding: 10px;
+  background-color: #eee;
+  border-radius: 3px;
+}
+hr {
+  border: 2px solid lightgray;
+  border-radius: 4px;
+  width: 90%;
+}
