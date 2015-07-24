@@ -6,11 +6,6 @@
 <link rel=stylesheet href=/lib/cm/cm.css>
 <link rel=stylesheet href=/lib/css/ui.css>
 
-<div id=background class="cm-s-default CodeMirror-scroll">
-  <div class=CodeMirror-gutter></div>
-  <div class=CodeMirror-lines></div>
-</div>
-
 <form id=toolbar name=export method=post target=_blank
   enctype=multipart/form-data>{{for i, crumb in nav {{
   <a href='{{= crumb.path in path in xmlattr}}' class="item crumb {{
