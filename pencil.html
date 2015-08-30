@@ -47,25 +47,25 @@
 <script>
   (function () {
     // UI elements
-    var validate = Scout('#validate'),
-        preview = Scout('#preview'),
-        run = Scout('#run'),
-        download = Scout('#download'),
-        settings = Scout('#settings'),
-        background = Scout('#background'),
-        wrapper = Scout('#wrapper'), delay;
+    var validate = Scout('#validate');
+    var preview = Scout('#preview');
+    var run = Scout('#run');
+    var download = Scout('#download');
+    var settings = Scout('#settings');
+    var wrapper = Scout('#wrapper');
+    var delay;
 
     // Template information
-    var path = {{= file.path in json in script}},
-        socket = Scout.socket(path),
-        mime = {{= {{
+    var path = {{= file.path in json in script}};
+    var socket = Scout.socket(path);
+    var mime = {{= {{
           file.meta.type? file.meta.type:
           lookup('types["' + extname + '"]')
-        }} in json in script}} || 'text/plain',
-        theme = {{= lookup('theme') in json in script}} || 'default',
-        keymap = {{= lookup('keymap') in json in script}} || 'default',
-        lineNumbers = {{= lookup('lineNumbers') in json in script}} || true,
-        lineWrapping = {{= lookup('lineWrapping') in json in script}} || true;
+        }} in json in script}} || 'text/plain';
+    var theme = {{= lookup('theme') in json in script}} || 'default';
+    var keymap = {{= lookup('keymap') in json in script}} || 'default';
+    var lineNumbers = {{= lookup('lineNumbers') in json in script}} || true;
+    var lineWrapping = {{= lookup('lineWrapping') in json in script}} || true;
 
     // Update UI elements on content changes
     function onChange() {
@@ -96,16 +96,6 @@
       wrapper.appendChild(cmClient.clientListEl);
     });
 
-    // codeMirrorClient.onCodeMirrorCursorActivity()
-    cm.setCursor({line:0,ch:0});
-
-    // CodeMirror themes
-    cm.setTheme = function(theme) {
-      cm.setOption('theme', theme);
-      background.className =
-        background.className.replace(/cm-s-[\w-]+/, 'cm-s-' + theme);
-    }; cm.setTheme(theme);
-
     // General button actions
     validate.target = run.target = download.target = settings.target = '_blank';
     download.href = path + '?plug=none';
@@ -113,13 +103,6 @@
 
     // Mime type specific environments
     if (environment[mime]) environment[mime](path);
-
-    // Reroute clicks in the background
-    background.onclick = function() {
-      var l = cm.lineCount() - 1;
-      cm.setCursor({line:l, ch:cm.getLine(l).length});
-      cm.focus();
-    }
 
   })();
 
