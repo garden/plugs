@@ -90,7 +90,8 @@
     "icl": "text/x-intercal",
     "nt": "text/x-n-triples",
     "icn": "text/x-icon",
-    "svg": "image/svg+xml"
+    "svg": "image/svg+xml",
+    "abc": "text/vnd.abc"
   },
   "drivers": {
     "dir": "dir",
@@ -177,7 +178,8 @@
     "image/svg+xml": "text",
     "text/plain": "text",
     "text": "text",
-    "binary": "binary"
+    "binary": "binary",
+    "text/vnd.abc": "text"
   },
   "Last-Modified": 1380366889202
 }
