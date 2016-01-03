@@ -1,4 +1,5 @@
-html { font-family: sans-serif; }
+html { font-family: sans-serif; color: #444; }
+body { max-width: 17cm; margin: auto; }
 blockquote {
   border-left: 4px solid lightgray;
   margin-left: 0;
@@ -16,3 +17,6 @@ hr {
   border-radius: 4px;
   width: 90%;
 }
+h1 { text-align: center; }
+h1, h2, h3, h4, h5, h6 { color: black; }
+p { text-align: justify; }
