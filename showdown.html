@@ -2,15 +2,12 @@
 <meta charset=utf-8>
 <title> {{= title in html}} </title>
 <link rel=stylesheet href=/lib/css/markdown.css?plug=none>
-
-<body></body>
-
+<body class=markdown></body>
 <script src=/lib/js/commonmark.js?plug=none></script>
+<script type=text id=content>{{= file.content in html}}</script>
 <script>
-  var text = {{= file.content in json}};
-
+  var text = content.textContent;
   var reader = new commonmark.Parser();
   var writer = new commonmark.HtmlRenderer();
-
   document.body.innerHTML = writer.render(reader.parse(text));
 </script>

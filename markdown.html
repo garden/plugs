@@ -4,9 +4,10 @@
 <title> {{= title in html}} </title>
 
 <link rel=stylesheet href=/lib/css/preview.css?plug=none>
+<link rel=stylesheet href=/lib/css/markdown.css?plug=none>
 
 <iframe id=source src="{{= file.path in path in xmlattr}}?plug=pencil"></iframe>
-<iframe id=preview></iframe>
+<div id=preview class=markdown></div>
 
 <script src=/lib/js/commonmark.js?plug=none></script>
 
@@ -17,11 +18,7 @@
   var writer = new commonmark.HtmlRenderer();
 
   source.contentWindow.addEventListener('message', function(event) {
-    // Preview HTML.
-    var ph = '<!doctype html><meta charset="utf-8"><title></title>\n' +
-      '<link rel="stylesheet" href="https://thefiletree.com/lib/css/markdown.css?plug=none">\n';
-    ph += writer.render(reader.parse(event.data));
-    preview.src = 'data:text/html,' + encodeURIComponent(ph);
+    preview.innerHTML = writer.render(reader.parse(event.data));
   });
 </script>
 
