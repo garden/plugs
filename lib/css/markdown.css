@@ -1,22 +1,27 @@
-html { font-family: sans-serif; color: #444; }
-body { max-width: 17cm; margin: auto; }
-blockquote {
+.markdown {
+  font-family: sans-serif;
+  color: #444;
+  max-width: 17cm;
+  margin: auto;
+}
+.markdown blockquote {
   border-left: 4px solid lightgray;
   margin-left: 0;
   padding-left: 15px;
   border-radius: 3px;
 }
-pre, code { font-family: monospace; }
-pre {
+.markdown pre, .markdown code { font-family: monospace; }
+.markdown pre {
   padding: 10px;
   background-color: #eee;
   border-radius: 3px;
 }
-hr {
+.markdown hr {
   border: 2px solid lightgray;
   border-radius: 4px;
   width: 90%;
 }
-h1 { text-align: center; }
-h1, h2, h3, h4, h5, h6 { color: black; }
-p { text-align: justify; }
+.markdown h1 { text-align: center; }
+.markdown h1, .markdown h2, .markdown h3, .markdown h4,
+.markdown h5, .markdown h6 { color: black; }
+.markdown p { text-align: justify; }
