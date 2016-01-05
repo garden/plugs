@@ -1,26 +1,13 @@
 <!doctype html>
 <meta charset=utf-8>
-<meta name=viewport content='width=device-width'>
 <title> {{= title in html}} </title>
-
-<link rel=stylesheet href=/lib/css/preview.css?plug=none>
 <link rel=stylesheet href=/lib/css/markdown.css?plug=none>
-
-<iframe id=source src="{{= file.path in path in xmlattr}}?plug=pencil"></iframe>
-<div id=preview class=markdown></div>
-
+<body class=markdown></body>
 <script src=/lib/js/commonmark.js?plug=none></script>
-
+<script type=text id=content>{{= file.content in html}}</script>
 <script>
-  var source =  document.getElementById('source');
-  var preview = document.getElementById('preview');
+  var text = content.textContent;
   var reader = new commonmark.Parser();
   var writer = new commonmark.HtmlRenderer();
-
-  source.contentWindow.addEventListener('message', function(event) {
-    preview.innerHTML = writer.render(reader.parse(event.data));
-  });
+  document.body.innerHTML = writer.render(reader.parse(text));
 </script>
-
-<!-- Google Analytics -->
-<script>var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-27876347-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})()</script>
