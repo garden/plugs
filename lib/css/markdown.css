@@ -3,6 +3,7 @@
   color: #444;
   max-width: 17cm;
   margin: auto;
+  padding: 0 8px;
 }
 .markdown blockquote {
   border-left: 4px solid lightgray;
