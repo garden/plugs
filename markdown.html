@@ -6,7 +6,7 @@
 <script src=/lib/js/commonmark.js?plug=none></script>
 <script>
   var text = {{= file.content in json in script}};
-  var reader = new commonmark.Parser();
+  var reader = new commonmark.Parser({smart: true});
   var writer = new commonmark.HtmlRenderer();
   document.body.innerHTML = writer.render(reader.parse(text));
 </script>
