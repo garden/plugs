@@ -6,9 +6,11 @@
 <link rel=stylesheet href=/lib/css/preview.css?plug=none>
 
 <iframe id=source src="{{= file.path in path in xmlattr}}?plug=pencil"></iframe>
-<div id=error></div>
-<div id=preview></div>
-<p>Open issues <a href="https://github.com/tpatel/OpenSequenceDiagrams.js/issues">here</a> if you find something going wrong !</p>
+<div id=preview>
+  <div id=error></div>
+  <div id=output></div>
+  <p>Open issues <a href="https://github.com/tpatel/OpenSequenceDiagrams.js/issues">here</a> if you find something going wrong !</p>
+</div>
 
 <script src=/lib/js/OpenSequenceDiagrams.js?plug=none></script>
 
@@ -17,7 +19,7 @@
       error = document.getElementById('error');
 
   source.contentWindow.addEventListener('message', function(event) {
-    var errorText = Sequence.parse(event.data, 'preview');
+    var errorText = Sequence.parse(event.data, 'output');
     error.innerHTML = errorText;
   });
 </script>
