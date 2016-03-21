@@ -151,6 +151,9 @@ body {
 
 /* Gateway file list */
 
+#filelist {
+  overflow: scroll;
+}
 #filelist li {
   padding: 5px;
   padding-left: 25px;
