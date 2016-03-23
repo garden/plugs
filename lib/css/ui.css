@@ -152,7 +152,7 @@ body {
 /* Gateway file list */
 
 #filelist {
-  overflow: scroll;
+  overflow: auto;
 }
 #filelist li {
   padding: 5px;

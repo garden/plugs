@@ -28,7 +28,7 @@
   <iframe id=uploader name=uploader class=hidden></iframe>
 </form>
 
-<div id=filelist>{{
+<div id=filelist class=panel>{{
   for file in {{files.sort(function(f1, f2) { return f2.time - f1.time })}} {{
   <li class={{if file.type==='dir' then folder else file}}><a {{#
     We do not want the menu to appear upon selecting the file for editing.
