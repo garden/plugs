@@ -167,20 +167,8 @@ body {
 #filelist li.file {
   background: url("/lib/icons/file_lines.png") 7px 7px / 12px no-repeat scroll padding-box;
 }
-#filelist li.file:hover:not(.selected-file) {
-  background: url("/lib/icons/file_lines.png") 7px 7px / 12px no-repeat scroll padding-box, linear-gradient(to right,#eef 0,#eef 4px,rgba(255,255,255,0) 4px) 0 0 / 100% no-repeat scroll padding-box;
-}
-#filelist li.file.focus:hover:not(.selected-file) {
-  background: url("/lib/icons/file_lines.png") 7px 7px / 12px no-repeat scroll padding-box, linear-gradient(to right,#e4e4ff 0,#e4e4ff 4px,rgba(255,255,255,0) 4px) 0 0 / 100% no-repeat scroll padding-box, #f2f2f2;
-}
 #filelist li.folder {
   background: url("/lib/icons/folder_blue.png") 7px 8px / 15px no-repeat scroll padding-box;
-}
-#filelist li.folder:hover:not(.selected-file) {
-  background: url("/lib/icons/folder_blue.png") 7px 8px / 15px no-repeat scroll padding-box,  linear-gradient(to right,#eef 0,#eef 4px,rgba(255,255,255,0) 4px) 0 0 / 100% no-repeat scroll padding-box;
-}
-#filelist li.folder.focus:hover:not(.selected-file) {
-  background: url("/lib/icons/folder_blue.png") 7px 8px / 15px no-repeat scroll padding-box, linear-gradient(to right,#e4e4ff 0,#e4e4ff 4px,rgba(255,255,255,0) 4px) 0 0 / 100% no-repeat scroll padding-box, #f2f2f2;
 }
 #filelist li a {
   color: #333;
@@ -189,8 +177,12 @@ body {
 #filelist li a:hover {
   text-decoration: underline;
 }
-#filelist li.focus {
-  background-color: #f2f2f2;
+#filelist li.focus::after {
+  content: ' ◆';
+  display: inline-block;
+  height: 0;
+  font-size: 0.7em;
+  color: #bbb;
 }
 
 button.incrusted {
