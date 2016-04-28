@@ -2,15 +2,10 @@
 
 JSMIN = uglifyjs
 CSSMIN = cat
-DATE = $$(date "+%Y-%m-%d")
 JSFILE = cm.js
 CSSFILE = cm.css
-DATEDJSFILE = cm$(DATE).js
-DATEDCSSFILE = cm$(DATE).css
 
 update: mirror
-	@if [ -f $(JSFILE) ]; then mv $(JSFILE) $(DATEDJSFILE); fi
-	@if [ -f $(CSSFILE) ]; then mv $(CSSFILE) $(DATEDCSSFILE); fi
 	@cp -rf mirror/LICENSE .
 	@cp -rf mirror/README.md .
 	@echo "concatenating..."
@@ -26,6 +21,8 @@ update: mirror
 	 cat mirror/addon/search/searchcursor.js >> $(JSFILE); \
 	 cat mirror/addon/search/search.js >> $(JSFILE); \
 	 cat mirror/addon/search/jump-to-line.js >> $(JSFILE); \
+	 cat mirror/addon/edit/matchbrackets.js >> $(JSFILE); \
+	 cat mirror/addon/edit/closebrackets.js >> $(JSFILE); \
 	 cat mirror/addon/mode/simple.js >> $(JSFILE); \
 	 cat mirror/addon/mode/overlay.js >> $(JSFILE);
 	@for mode in `ls mirror/mode`; do \
