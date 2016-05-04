@@ -24,6 +24,7 @@ update: mirror
 	 cat mirror/addon/edit/matchbrackets.js >> $(JSFILE); \
 	 cat mirror/addon/edit/closebrackets.js >> $(JSFILE); \
 	 cat mirror/addon/edit/continuelist.js >> $(JSFILE); \
+	 cat mirror/addon/comment/continuecomment.js >> $(JSFILE); \
 	 cat mirror/addon/mode/simple.js >> $(JSFILE); \
 	 cat mirror/addon/mode/overlay.js >> $(JSFILE);
 	@for mode in `ls mirror/mode`; do \
