@@ -91,7 +91,9 @@
     "nt": "text/x-n-triples",
     "icn": "text/x-icon",
     "svg": "image/svg+xml",
-    "abc": "text/vnd.abc"
+    "abc": "text/vnd.abc",
+    "makefile": "text/x-make",
+    "Makefile": "text/x-make"
   },
   "drivers": {
     "dir": "dir",
@@ -179,7 +181,8 @@
     "text/plain": "text",
     "text": "text",
     "binary": "binary",
-    "text/vnd.abc": "text"
+    "text/vnd.abc": "text",
+    "text/x-make": "text"
   },
   "Last-Modified": 1380366889202
 }

@@ -72,6 +72,16 @@
       postMessage(cm.getValue(), '*');
     }
 
+    function betterTab(cm) {
+      if (cm.somethingSelected()) {
+        cm.indentSelection('add');
+      } else {
+        cm.replaceSelection(cm.getOption("indentWithTabs")? "\t":
+          Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+      }
+    }
+    function betterShiftTab(cm) { cm.indentSelection('subtract'); }
+
     // CodeMirror editor
     var cm = window.cm = CodeMirror(wrapper, {
       mode: mime,
@@ -83,6 +93,10 @@
       autoCloseBrackets: '()[]{}""',
       theme: theme,
       keyMap: keymap,
+      extraKeys: {
+        Tab: betterTab,
+        'Shift-Tab': betterShiftTab
+      },
       readOnly: 'nocursor'  // It'll be writable when the connection is set up.
     });
     cm.on('change', onChange);
