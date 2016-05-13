@@ -100,6 +100,16 @@
       },
       readOnly: 'nocursor'  // It'll be writable when the connection is set up.
     });
+    // Hack to make wrapped text indented.
+    var charWidth = cm.defaultCharWidth();
+    cm.on('renderLine', function(cm, line, elt) {
+      var off = CodeMirror.countColumn(line.text, null, cm.getOption('tabSize'))
+        * charWidth;
+      var basePadding = 4;
+      elt.style.textIndent = '-' + off + 'px';
+      elt.style.paddingLeft = (basePadding + off) + 'px';
+    });
+    cm.refresh();
     cm.on('change', onChange);
     onChange();     // Send the initial value.
 
