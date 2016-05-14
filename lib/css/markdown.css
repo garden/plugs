@@ -24,6 +24,7 @@
   padding: 10px;
   background-color: #eee;
   border-radius: 3px;
+  overflow: auto;
 }
 .markdown hr {
   border: 0;
