@@ -154,6 +154,9 @@ body {
 #filelist {
   overflow: auto;
 }
+#filelist.dropfile {
+  background: #eef;
+}
 #filelist li {
   padding: 5px;
   padding-left: 25px;
