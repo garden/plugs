@@ -1,0 +1,65 @@
+<!doctype html>
+<meta charset=utf-8>
+{{ var title = path.slice(path.lastIndexOf('/') + 1) || 'The File Tree'; }}
+<title> Metadata of {{= title in html}}  </title>
+
+<style>
+  html body { font-family: monospace; margin-top: 3em; }
+  p#saved { visibility: hidden; }
+  div#show { margin-bottom: 13px; }
+  p#info {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 5px;
+    background: white;
+    box-shadow: 0px 0px 10px #eee;
+  }
+</style>
+
+<p id=info> Click on an item to edit it.
+Then <button class=shown id=save> Save </button>. <span id=saved></span></p>
+
+<div class='webjson-element' id=show></div>
+
+<script src='/lib/js/webjson.js'></script>
+<script src='/lib/js/scout.js'></script>
+
+<script>
+onload = function() {
+  JSON.web({{= metadata in json}},
+  'show', {template: 'rewrite'});
+
+  var path = {{= path in json}};
+  var save = document.getElementById('save');
+  var saved = document.getElementById('saved');
+
+  save.addEventListener('click', function() {
+    save.disabled = true;
+    saved.textContent = 'Saving…';
+    saved.style.visibility = 'visible';
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', path + '?app=metadata', true);
+    xhr.onload = function() {
+      if (xhr.status  < 200 || xhr.status >= 300) {
+        alert('Saving the metadata failed with error code ' + xhr.status + ' ' +
+            xhr.statusText);
+      } else {
+        save.disabled = false;
+        saved.textContent = 'Saved!';
+        setTimeout(function () {
+          saved.style.visibility = 'hidden';
+        }, 1000);
+      }
+    };
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(JSON.getweb.show));
+  });
+};
+</script>
+
+<!-- Google Analytics -->
+<script>var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-27876347-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})()</script>

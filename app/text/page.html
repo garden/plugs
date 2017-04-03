@@ -1,0 +1,165 @@
+<!doctype html>
+<meta charset=utf-8>
+<meta name=viewport content='width=device-width'>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+{{ var title = path.slice(path.lastIndexOf('/') + 1) || 'The File Tree'; }}
+<title> {{= title in html}} </title>
+
+<link rel=stylesheet href=/lib/cm/cm.css>
+<link rel=stylesheet href=/lib/css/ui.css>
+
+{{
+var nav = [];
+var subpath = '/';
+var crumbs = path.split('/').filter(function(e) { return e.length > 0; });
+var subpath = '/';
+nav.push({name: '', path: subpath});
+for (var i = 0; i < crumbs.length; i++) {
+  subpath += crumbs[i] + '/';
+  nav.push({name: crumbs[i], path: subpath});
+}
+}}
+<form id=toolbar name=export method=post target=_blank
+  enctype=multipart/form-data>{{for i, crumb in nav {{
+  <a href='{{= crumb.path in path in xmlattr}}'
+     class="item crumb {{if i==0 then root-crumb
+  }}">{{= crumb.name in html}}</a>}}}}
+  <a class=item id=preview title=preview><img src=/lib/icons/eye_open.png></a>
+  <a class=item id=validate title=validate><img src=/lib/icons/ok_2.png></a>
+  <a class=item id=run title=run><img src=/lib/icons/play.png></a>
+  <a class="item right" id=settings title=settings><img src=/lib/icons/settings.png></a>
+  <select onchange=selectTheme(this) class="item right" id=theme
+    title=theme>{{for theme in {{
+    ['default','ambiance','blackboard','cobalt','eclipse','elegant',
+    'erlang-dark','lesser-dark','monokai','neat','night','rubyblue',
+    'vibrant-ink','xq-dark'] }}
+    {{
+   <option{{if params['/codemirror']&&theme===params['/codemirror'].theme then
+            {{ selected}}
+          }}>{{= theme in html}}</option>}} }}
+  </select>
+  <a class="item right" id=download title=download download><img src=/lib/icons/download_alt.png></a>
+  <a class="item right" id=dictate title=dictate><img src=/lib/icons/microphone.png></a>
+  <a class="item right" id=sync-state title='sync state'><span></span><img src=/lib/img/offline.svg></a>
+  <input type=hidden name=code>
+  <input type=hidden name=file>
+  <input type=hidden name=lang>
+  <input type=hidden name=ucn_text>
+  <input type=hidden name=ucn_text_mime>
+  <input type=hidden name=ucn_task value=conformance>
+  <input type=hidden name=run value=True>
+</form>
+
+<div id=wrapper class=panel></div>
+
+<base target=_parent>
+
+<script src=/lib/cm/cm.js></script>
+<script src=/lib/js/canop/lib.js></script>
+<script src=/lib/js/canop/cm.js></script>
+<script src=/app/text/page.js></script>
+
+<script>
+  (function () {
+    // UI elements
+    var validate = document.querySelector('#validate');
+    var preview = document.querySelector('#preview');
+    var run = document.querySelector('#run');
+    var download = document.querySelector('#download');
+    var settings = document.querySelector('#settings');
+    var wrapper = document.querySelector('#wrapper');
+    var delay;
+
+    // Update UI elements on content changes
+    function onChange() {
+      postMessage(cm.getValue(), '*');
+    }
+
+    function betterTab(cm) {
+      if (cm.somethingSelected()) {
+        cm.indentSelection('add');
+      } else {
+        cm.replaceSelection(cm.getOption("indentWithTabs")? "\t":
+          Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+      }
+    }
+    function betterShiftTab(cm) { cm.indentSelection('subtract'); }
+
+    var path = {{= path in json in script}};
+    var mime = {{= metadata.type in json in script}} || 'text/plain';
+    var codeMirrorParams = {
+      mode: mime,
+      value: {{= data in json in script}},
+      autofocus: true,
+      lineNumbers: true,
+      matchBrackets: true,
+      autoCloseBrackets: '()[]{}""',
+      continueComments: true,
+      extraKeys: {
+        Tab: betterTab,
+        'Shift-Tab': betterShiftTab
+      },
+      readOnly: 'nocursor'  // It'll be writable when the connection is set up.
+    };
+    var extraCodeMirrorParams = {{= params['/codemirror'] in json in script}} || {};
+    Object.keys(extraCodeMirrorParams).forEach(function(key) {
+      codeMirrorParams[key] = extraCodeMirrorParams[key];
+    });
+
+    // CodeMirror editor
+    var cm = window.cm = CodeMirror(wrapper, codeMirrorParams);
+    // Hack to make wrapped text indented.
+    var charWidth = cm.defaultCharWidth();
+    cm.on('renderLine', function(cm, line, elt) {
+      var off = CodeMirror.countColumn(line.text, null, cm.getOption('tabSize'))
+        * charWidth;
+      var basePadding = 4;
+      elt.style.textIndent = '-' + off + 'px';
+      elt.style.paddingLeft = (basePadding + off) + 'px';
+    });
+    cm.refresh();
+    cm.on('change', onChange);
+    onChange();     // Send the initial value.
+
+    // Operational Transformation
+    var collabEdit = new CanopCodemirrorHook(cm, {
+      url: "ws" + window.location.protocol.slice(4) + "//" +
+        window.location.host + window.location.pathname + "?op=edit&app=text",
+    });
+    var canopClient = collabEdit.canopClient;
+    canopClient.once('synced', function() {
+      cm.setOption('readOnly', false);
+    });
+    var syncState = document.getElementById('sync-state');
+    var syncImg = document.querySelector('#sync-state > img');
+    canopClient.on('synced', function() {
+      syncImg.src = '/lib/img/synced.svg';
+    });
+    canopClient.on('syncing', function() {
+      syncImg.src = '/lib/img/syncing.svg';
+    });
+    canopClient.on('unsyncable', function() {
+      syncImg.src = '/lib/img/offline.svg';
+    });
+    canopClient.on('signal', function() {
+      // FIXME: use a proper client count, not implemented in canop yet.
+      // Set the title on the sync* events.
+      var nClients = 1 + Object.keys(canopClient.signalFromClient).length;
+      var nClientsTxt = (nClients > 1) ? String(nClients) + ' users' : 'sync state';
+      syncState.title = nClientsTxt;
+    });
+
+    // General button actions
+    validate.target = run.target = download.target = settings.target = '_blank';
+    download.href = path + '?app=data';
+    settings.href = path + '?app=meta';
+
+    // Mime type specific environments
+    if (environment[mime]) environment[mime](path);
+
+  })();
+
+</script>
+
+<!-- Google Analytics -->
+<script>var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-27876347-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})()</script>

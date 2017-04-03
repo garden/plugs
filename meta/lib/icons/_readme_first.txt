@@ -1,4 +1,0 @@
-{
-  "type": "text/plain",
-  "Last-Modified": 1357321412035
-}

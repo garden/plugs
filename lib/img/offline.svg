@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="100px" height="100px">
+  <path d="M40 25 l15 -15 l30 30 l10 -10 l0 35 l-35 0 l10 -10z"/>
+  <path d="M60 75 l-15 15 l-30 -30 l-10 10 l0 -35 l35 0 l-10 10z"/>
+  <path d="M5 80 l75 -75 l15 15 l-75 75z"/>
+</svg>

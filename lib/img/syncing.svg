@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="100px" height="100px">
+  <style>
+    @keyframes ta {to {transform: translate(10px, 10px)}}
+    @keyframes tb {to {transform: translate(-10px, -10px)}}
+    #a, #b {animation: 0.5s infinite alternate;}
+    #a {animation-name: ta}
+    #b {animation-name: tb}
+  </style>
+  <path id="a" d="M30 15 l15 -15 l30 30 l10 -10 l0 35 l-35 0 l10 -10z"/>
+  <path id="b" d="M70 85 l-15 15 l-30 -30 l-10 10 l0 -35 l35 0 l-10 10z"/>
+</svg>

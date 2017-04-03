@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 META=../../meta
 
-all: midi/
+all: midi/ js/
 
 midi/: git-midi/
 	mkdir -p midi "$(META)/lib/midi/js" "$(META)/lib/midi/util"
@@ -21,5 +21,14 @@ midi/: git-midi/
 
 git-midi/:
 	git clone --depth 1 https://github.com/mudcube/MIDI.js.git git-midi
+
+js/: js/canop/
+
+js/canop/:
+	mkdir js/canop
+	cat ../../node_modules/canop/canop.js \
+	  | uglifyjs > js/canop/lib.js
+	cat ../../node_modules/canop/web/canop-codemirror.js \
+	  | uglifyjs > js/canop/cm.js
 
 .PHONY: all
