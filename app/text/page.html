@@ -138,8 +138,11 @@ for (var i = 0; i < crumbs.length; i++) {
     canopClient.on('syncing', function() {
       syncImg.src = '/lib/img/syncing.svg';
     });
-    canopClient.on('unsyncable', function() {
+    canopClient.on('unsyncable', function(e) {
       syncImg.src = '/lib/img/offline.svg';
+      if (e && e.name === 'UnknownBaseError') {
+        alert("We cannot merge your changes with the server. Please reload.");
+      }
     });
     canopClient.on('signal', function() {
       // FIXME: use a proper client count, not implemented in canop yet.
