@@ -1,0 +1,43 @@
+<!doctype html>
+<meta charset=utf-8>
+<meta name=viewport content='width=device-width'>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<title> Sign Up </title>
+
+<link rel=stylesheet href=/lib/cm/cm.css>
+<link rel=stylesheet href=/lib/css/ui.css>
+
+<nav id=toolbar name=export method=post target=_blank
+  enctype=multipart/form-data>
+  <a href='/' class="item crumb root-crumb"></a>
+  <a href='/app/' class="item crumb">app</a>
+  <a href='/app/account/' class="item crumb">account</a>
+</nav>
+
+<main class=about-page>
+ {{if !loggedIn then {{
+  <h1> Create an Account </h1>
+  <form action=/api/1/signup>
+    <p>
+      <label><input name=user placeholder=steph> — Name</label><br>
+      <label><input name=email type=email placeholder='me@example.com'> — Email</label>
+    </p>
+    <input name=appAuth type=hidden value='{{= appAuth in xmlattr}}'>
+    <button>Sign Up</button>
+  </form>
+  <p>
+  Once you sign up, we will send you an email within a few minutes to confirm your
+  ownership of that email address. <br>
+  Clicking the link inside that email will log you in.
+  </p>
+ }} else {{
+  <h1> Account information </h1>
+  <ul>
+    <li> Email: {{= user.email in html}} </li>
+    <li> Name: {{= user.name in html}} </li>
+  </ul>
+  <form action=/api/1/logout>
+    <button>Log Out</button>
+  </form>
+ }}}}
+</main>

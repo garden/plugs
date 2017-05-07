@@ -287,6 +287,47 @@
               }
             }
           }
+        },
+        "account": {
+          "meta": {
+            "type": "folder",
+            "modified": "2017-04-29T21:41:20.438Z",
+            "updated": "2017-04-29T21:44:08.325Z",
+            "app": "account"
+          },
+          "files": {
+            "page.html": {
+              "meta": {
+                "modified": "2017-04-29T21:41:20.394Z",
+                "updated": "2017-04-29T21:41:20.438Z",
+                "type": "text/html"
+              }
+            },
+            "signed-up.html": {
+              "meta": {
+                "modified": "2017-05-03T21:44:32.286Z",
+                "updated": "2017-05-03T22:04:16.275Z",
+                "type": "text/html",
+                "app": "data"
+              }
+            },
+            "logged-in.html": {
+              "meta": {
+                "modified": "2017-05-03T22:35:14.458Z",
+                "updated": "2017-05-03T22:36:05.871Z",
+                "type": "text/html",
+                "app": "data"
+              }
+            },
+            "email-not-confirmed.html": {
+              "meta": {
+                "modified": "2017-05-03T22:35:37.109Z",
+                "updated": "2017-05-03T22:36:17.915Z",
+                "type": "text/html",
+                "app": "data"
+              }
+            }
+          }
         }
       }
     },
