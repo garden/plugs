@@ -132,25 +132,33 @@ for (var i = 0; i < crumbs.length; i++) {
     });
     var syncState = document.getElementById('sync-state');
     var syncImg = document.querySelector('#sync-state > img');
+    var setSyncText = function() {
+      if (canopClient.clientCount > 1) {
+        syncState.title = canopClient.clientCount + ' users';
+      } else if (canopClient.clientState === 0) {
+        syncState.title = 'offline';
+      } else if (canopClient.clientState === 1) {
+        syncState.title = 'syncing';
+      } else if (canopClient.clientState === 2) {
+        syncState.title = 'synced';
+      }
+    };
     canopClient.on('synced', function() {
       syncImg.src = '/lib/img/synced.svg';
+      setSyncText();
     });
     canopClient.on('syncing', function() {
       syncImg.src = '/lib/img/syncing.svg';
+      setSyncText();
     });
     canopClient.on('unsyncable', function(e) {
       syncImg.src = '/lib/img/offline.svg';
+      setSyncText();
       if (e && e.name === 'UnknownBaseError') {
         alert("We cannot merge your changes with the server. Please reload.");
       }
     });
-    canopClient.on('signal', function() {
-      // FIXME: use a proper client count, not implemented in canop yet.
-      // Set the title on the sync* events.
-      var nClients = 1 + Object.keys(canopClient.signalFromClient).length;
-      var nClientsTxt = (nClients > 1) ? String(nClients) + ' users' : 'sync state';
-      syncState.title = nClientsTxt;
-    });
+    canopClient.on('signal', function() { setSyncText(); });
 
     // General button actions
     validate.target = run.target = download.target = settings.target = '_blank';
