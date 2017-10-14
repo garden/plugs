@@ -1,0 +1,112 @@
+<!doctype html>
+<meta charset=utf-8>
+<meta name=viewport content='width=device-width'>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+{{ var title = path.slice(path.lastIndexOf('/') + 1) || 'The File Tree'; }}
+<title> Configure {{= title in html}} </title>
+
+<link rel=stylesheet href=/lib/css/ui.css>
+<style>
+#save, #saved {
+  position: relative;
+  top: 5px;
+  margin-left: 5px;
+}
+</style>
+
+{{
+var nav = [];
+var subpath = '/';
+var crumbs = path.split('/').filter(function(e) { return e.length > 0; });
+var subpath = '/';
+nav.push({name: '', path: subpath});
+for (var i = 0; i < crumbs.length; i++) {
+  subpath += crumbs[i] + '/';
+  nav.push({name: crumbs[i], path: subpath});
+}
+}}
+<nav id=toolbar class=about-page>
+  {{for i, crumb in nav {{
+  <a href='{{= crumb.path in path in xmlattr}}'
+     class="item crumb {{if i==0 then root-crumb
+  }}">{{= crumb.name in html}}</a>}}}}
+  <button id=save>Save</button>
+  <span id=saved></span>
+</nav>
+
+<main class=about-page>
+  <h1> Access </h1>
+  {{ var acl = metadata.acl; }}
+  <form id='acl-form'>
+    <table>
+      <tbody>
+      {{for user, permission in acl
+        {{{{ if (user === '*') { continue; } }}
+        <tr><th>{{= user in html}}</th><td>
+          <select name="{{= user in xmlattr}}">
+            <option value=- {{if permission==='-' then selected}}> Forbidden </option>
+            <option value=r {{if permission==='r' then selected}}> Reader </option>
+            <option value=w {{if permission==='w' then selected}}> Writer </option>
+            <option value=x {{if permission==='x' then selected}}> Owner </option>
+          </select>
+        </td></tr>}}
+      }}
+      {{ var othersPerm = acl['*']; }}
+        <tr><th>others</th><td>
+          <select name="*">
+            <option value=- {{if othersPerm==='-' then selected}}> Forbidden </option>
+            <option value=r {{if othersPerm==='r' then selected}}> Reader </option>
+            <option value=w {{if othersPerm==='w' then selected}}> Writer </option>
+            <option value=x {{if othersPerm==='x' then selected}}> Owner </option>
+          </select>
+        </td></tr>
+      </tbody>
+    </table>
+  </form>
+</main>
+
+<script>
+addEventListener('DOMContentLoaded', function() {
+  var metadata = {{= metadata in json}};
+  var path = {{= path in json}};
+
+  var save = document.getElementById('save');
+  var saved = document.getElementById('saved');
+  var aclForm = document.getElementById('acl-form');
+
+  var readMetadata = function() {
+    var acl = Object.create(null);
+    for (var i = 0; i < aclForm.length; i++) {
+      acl[aclForm[i].name] = aclForm[i].value;
+    }
+    metadata.acl = acl;
+    return metadata;
+  };
+
+  save.addEventListener('click', function() {
+    save.disabled = true;
+    saved.textContent = 'Saving…';
+    saved.style.visibility = 'visible';
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', path + '?app=metadata', true);
+    xhr.onload = function() {
+      if (xhr.status  < 200 || xhr.status >= 300) {
+        alert('Saving the metadata failed with error code ' + xhr.status + ' ' +
+            xhr.statusText);
+      } else {
+        save.disabled = false;
+        saved.textContent = 'Saved!';
+        setTimeout(function () {
+          saved.style.visibility = 'hidden';
+        }, 1000);
+      }
+    };
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(readMetadata()));
+  });
+});
+</script>
+
+<!-- Google Analytics -->
+<script>var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-27876347-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})()</script>

@@ -4,11 +4,9 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <title> Sign Up </title>
 
-<link rel=stylesheet href=/lib/cm/cm.css>
 <link rel=stylesheet href=/lib/css/ui.css>
 
-<nav id=toolbar name=export method=post target=_blank
-  enctype=multipart/form-data>
+<nav id=toolbar>
   <a href='/' class="item crumb root-crumb"></a>
   <a href='/app/' class="item crumb">app</a>
   <a href='/app/account/' class="item crumb">account</a>
@@ -19,7 +17,7 @@
   <h1> Create an Account </h1>
   <form action=/api/1/signup>
     <p>
-      <label><input name=user placeholder=steph> — Name</label><br>
+      <label><input name=name placeholder=steph> — Name</label><br>
       <label><input name=email type=email placeholder='me@example.com'> — Email</label>
     </p>
     <input name=appAuth type=hidden value='{{= appAuth in xmlattr}}'>
