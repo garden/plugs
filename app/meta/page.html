@@ -28,7 +28,7 @@ Then <button class=shown id=save> Save </button>. <span id=saved></span></p>
 <script src='/lib/js/scout.js'></script>
 
 <script>
-onload = function() {
+addEventListener('DOMContentLoaded', function() {
   JSON.web({{= metadata in json}},
   'show', {template: 'rewrite'});
 
@@ -58,7 +58,7 @@ onload = function() {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(JSON.getweb.show));
   });
-};
+});
 </script>
 
 <!-- Google Analytics -->
