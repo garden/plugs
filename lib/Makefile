@@ -17,6 +17,7 @@ js/canop/:
 	cat ../../node_modules/canop/canop.js \
 	  | uglifyjs > js/canop/lib.js
 	cat ../../node_modules/canop/web/canop-codemirror.js \
+	    ../../node_modules/canop/web/canop-websocket.js \
 	  | uglifyjs > js/canop/cm.js
 
 clean:
