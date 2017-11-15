@@ -122,11 +122,12 @@ for (var i = 0; i < crumbs.length; i++) {
     onChange();     // Send the initial value.
 
     // Operational Transformation
-    var collabEdit = new CanopCodemirrorHook(cm, {
+    var canopClient = new canop.Client();
+    canop.wire.websocket(canopClient, {
       url: "ws" + window.location.protocol.slice(4) + "//" +
         window.location.host + window.location.pathname + "?op=edit&app=text",
     });
-    var canopClient = collabEdit.canopClient;
+    canop.ui.codemirror(canopClient, cm);
     canopClient.once('synced', function() {
       cm.setOption('readOnly', false);
     });
