@@ -12,6 +12,7 @@
   top: 5px;
   margin-left: 5px;
 }
+#acl-table { margin-bottom: 1rem; }
 </style>
 
 {{
@@ -36,32 +37,12 @@ for (var i = 0; i < crumbs.length; i++) {
 
 <main class=about-page>
   <h1> Access </h1>
-  {{ var acl = metadata.acl; }}
-  <form id='acl-form'>
-    <table>
+  <form id='acl-form' action='javascript:void 0'>
+    <table id='acl-table'>
       <tbody>
-      {{for user, permission in acl
-        {{{{ if (user === '*') { continue; } }}
-        <tr><th>{{= user in html}}</th><td>
-          <select name="{{= user in xmlattr}}">
-            <option value=- {{if permission==='-' then selected}}> Forbidden </option>
-            <option value=r {{if permission==='r' then selected}}> Reader </option>
-            <option value=w {{if permission==='w' then selected}}> Writer </option>
-            <option value=x {{if permission==='x' then selected}}> Owner </option>
-          </select>
-        </td></tr>}}
-      }}
-      {{ var othersPerm = acl['*']; }}
-        <tr><th>others</th><td>
-          <select name="*">
-            <option value=- {{if othersPerm==='-' then selected}}> Forbidden </option>
-            <option value=r {{if othersPerm==='r' then selected}}> Reader </option>
-            <option value=w {{if othersPerm==='w' then selected}}> Writer </option>
-            <option value=x {{if othersPerm==='x' then selected}}> Owner </option>
-          </select>
-        </td></tr>
       </tbody>
     </table>
+    <button id=add-user>Add</button>
   </form>
 </main>
 
@@ -73,15 +54,68 @@ addEventListener('DOMContentLoaded', function() {
   var save = document.getElementById('save');
   var saved = document.getElementById('saved');
   var aclForm = document.getElementById('acl-form');
+  var aclTable = document.getElementById('acl-table');
 
-  var readMetadata = function() {
-    var acl = Object.create(null);
-    for (var i = 0; i < aclForm.length; i++) {
-      acl[aclForm[i].name] = aclForm[i].value;
-    }
-    metadata.acl = acl;
-    return metadata;
+  var escapeHtml = function(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;');
   };
+
+  var escapeAttr = function(text) {
+    return text.replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  };
+
+  var latestTrackerId = 0;
+  var EventMapping = function(eventName, callback) {
+    this.id = 'gen-' + (latestTrackerId++);
+    this.eventName = eventName;
+    this.callback = callback;
+  };
+
+  var acl = metadata.acl || {};
+  aclTable.data = window.acl = acl;
+  var aclTableWidget = function(element) {
+    var data = element.data;
+    var eventsToMap = [];  // Array of {id, eventName, callback}.
+    var html = '<tbody>';
+    for (let user in data) {
+      if (user !== '*') {
+        var permission = data[user];
+        var eventMapping = new EventMapping('change', function(event) {
+          data[user] = event.target.value;
+        });
+        eventsToMap.push(eventMapping);
+        html += '<tr><th>' + escapeHtml(user)
+          + '<td><select name="' + escapeAttr(user) + '" id="' + eventMapping.id + '">'
+          +   '<option value=- ' + (permission === '-'? 'selected': '') + '> Forbidden </option>'
+          +   '<option value=r ' + (permission === 'r'? 'selected': '') + '> Reader </option>'
+          +   '<option value=w ' + (permission === 'w'? 'selected': '') + '> Writer </option>'
+          +   '<option value=x ' + (permission === 'x'? 'selected': '') + '> Owner </option>'
+          + '</select>';
+      }
+    }
+    var othersPermission = acl['*'];
+    if (!!othersPermission) {
+      var eventMapping = new EventMapping('change', function(event) {
+        data['*'] = event.target.value;
+      });
+      eventsToMap.push(eventMapping);
+      html += '<tr><th> others'
+        + '<td><select name="*" id="' + eventMapping.id + '">'
+        +   '<option value=- ' + (othersPermission === '-'? 'selected': '') + '> Forbidden </option>'
+        +   '<option value=r ' + (othersPermission === 'r'? 'selected': '') + '> Reader </option>'
+        +   '<option value=w ' + (othersPermission === 'w'? 'selected': '') + '> Writer </option>'
+        +   '<option value=x ' + (othersPermission === 'x'? 'selected': '') + '> Owner </option>'
+        + '</select>';
+    }
+    element.innerHTML = html;
+
+    for (var i = 0; i < eventsToMap.length; i++) {
+      var eventToMap = eventsToMap[i];
+      var elementToMap = document.getElementById(eventToMap.id);
+      elementToMap.addEventListener(eventToMap.eventName, eventToMap.callback);
+    }
+  };
+  aclTableWidget(aclTable);
 
   save.addEventListener('click', function() {
     save.disabled = true;
@@ -103,7 +137,17 @@ addEventListener('DOMContentLoaded', function() {
       }
     };
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(readMetadata()));
+    xhr.send(JSON.stringify(metadata));
+  });
+
+  // Add user.
+  var addUserBut = document.getElementById('add-user');
+  addUserBut.addEventListener('click', function() {
+    var username = prompt('Please enter the username whose permissions you wish to configure:');
+    if (!!username) {
+      acl[username] = '-';
+      aclTableWidget(aclTable);
+    }
   });
 });
 </script>
