@@ -13,7 +13,7 @@
   margin-left: 5px;
 }
 #acl-table {
-  margin-bottom: 1rem;
+  margin-bottom: 1.34rem;
   border-collapse: collapse;
 }
 #acl-table th {
@@ -127,7 +127,7 @@ addEventListener('DOMContentLoaded', function() {
       });
       eventsToMap.push(changeEvent, deleteEvent);
       html += '<tr><td><input type=button class=hovershow id="' + deleteEvent.id + '" value=×>'
-        + '<th> others'
+        + '<th> <em>others</em>'
         + '<td><select name="*" id="' + changeEvent.id + '">'
         +   '<option value=- ' + (othersPermission === '-'? 'selected': '') + '> Forbidden </option>'
         +   '<option value=r ' + (othersPermission === 'r'? 'selected': '') + '> Reader </option>'
@@ -171,7 +171,7 @@ addEventListener('DOMContentLoaded', function() {
   // Add user.
   var addUserBut = document.getElementById('add-user');
   addUserBut.addEventListener('click', function() {
-    var username = prompt('Please enter the username whose permissions you wish to configure:');
+    var username = prompt('Please enter the username whose permissions you wish to configure (enter * for others):');
     if (!!username) {
       acl[username] = '-';
       aclTableWidget(aclTable);
