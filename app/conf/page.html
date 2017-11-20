@@ -56,10 +56,7 @@ for (var i = 0; i < crumbs.length; i++) {
 <main class=about-page>
   <h1> Access </h1>
   <form id='acl-form' action='javascript:void 0'>
-    <table id='acl-table'>
-      <tbody>
-      </tbody>
-    </table>
+    <table id='acl-table'></table>
     <button id=add-user>Add</button>
   </form>
 </main>
@@ -134,6 +131,10 @@ addEventListener('DOMContentLoaded', function() {
         +   '<option value=w ' + (othersPermission === 'w'? 'selected': '') + '> Writer </option>'
         +   '<option value=x ' + (othersPermission === 'x'? 'selected': '') + '> Owner </option>'
         + '</select>';
+    }
+    html += '</tbody>';
+    if (Object.keys(data).length === 0) {
+      html += 'There are no configured access rules yet.'
     }
     element.innerHTML = html;
 
