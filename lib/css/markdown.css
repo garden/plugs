@@ -47,7 +47,8 @@
   max-height: 90vh;
   max-width: 17cm;
 }
-.markdown p > img:only-child {
+.markdown p > img:only-child,
+.markdown p > a:only-child > img, {
   display: block;
   margin: auto;
   margin-left: 50%;
@@ -61,7 +62,8 @@
     /* 16px for the markdown padding. */
     max-width: calc(100vw - 16px);
   }
-  .markdown p > img:only-child {
+  .markdown p > img:only-child,
+  .markdown p > a:only-child > img {
     max-width: calc(100vw - 12px - 16px);
   }
 }
