@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content='width=device-width'>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<title> Sign Up </title>
+<title> Log In </title>
 
 <link rel=stylesheet href=/lib/css/ui.css>
 
@@ -13,32 +13,17 @@
 </nav>
 
 <main class=about-page>
- {{if !loggedIn then {{
-  <h1> Create an Account </h1>
-  <form action=/api/1/signup>
+  <h1> Log In </h1>
+  <form action=/api/1/signin>
     <p>
-      <label><input name=name placeholder=steph> — Name</label><br>
       <label><input name=email type=email placeholder='me@example.com'> — Email</label>
     </p>
     <input name=appAuth type=hidden value='{{= appAuth in xmlattr}}'>
-    <button>Sign Up</button>
+    <button>Sign In</button>
   </form>
   <p>
-  Once you sign up, we will send you an email within a few minutes to confirm your
-  ownership of that email address. <br>
+  Once you sign in, we will send you an email within a few minutes to
+  confirm your ownership of that email address. <br>
   Clicking the link inside that email will log you in.
   </p>
-  <p>
-  Do you want to <a href=/app/account/sign-in.html>log in</a> instead?
-  </p>
- }} else {{
-  <h1> Account information </h1>
-  <ul>
-    <li> Email: {{= user.email in html}} </li>
-    <li> Name: {{= user.name in html}} </li>
-  </ul>
-  <form action=/api/1/logout>
-    <button>Log Out</button>
-  </form>
- }}}}
 </main>
