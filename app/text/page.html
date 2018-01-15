@@ -86,6 +86,7 @@ for (var i = 0; i < crumbs.length; i++) {
     function betterShiftTab(cm) { cm.indentSelection('subtract'); }
 
     var path = {{= path in json in script}};
+    var permission = {{= permission in json in script}};
     var mime = {{= metadata.type in json in script}} || 'text/plain';
     var codeMirrorParams = {
       mode: mime,
@@ -129,7 +130,9 @@ for (var i = 0; i < crumbs.length; i++) {
     });
     canop.ui.codemirror(canopClient, cm);
     canopClient.once('synced', function() {
-      cm.setOption('readOnly', false);
+      if (/^[wx]$/.test(permission)) {
+        cm.setOption('readOnly', false);
+      }
     });
     var syncState = document.getElementById('sync-state');
     var syncImg = document.querySelector('#sync-state > img');
