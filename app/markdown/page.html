@@ -1,9 +1,9 @@
 <!doctype html>
 <meta charset=utf-8>
 <title> {{= title in html}} </title>
-<link rel=stylesheet href=/lib/css/markdown.css?plug=none>
+<link rel=stylesheet href=/lib/css/markdown.css>
 <body class=markdown></body>
-<script src=/lib/js/commonmark.js?plug=none></script>
+<script src=/lib/js/commonmark.js></script>
 <script>
   var text = {{= file.content in json in script}};
   var reader = new commonmark.Parser({smart: true});

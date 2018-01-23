@@ -3,8 +3,8 @@
 <meta name=viewport content='width=device-width'>
 <title> {{= title in html}} </title>
 
-<link rel=stylesheet href=/lib/css/ui.css?plug=none>
-<link rel=stylesheet href=/lib/css/irc.css?plug=none>
+<link rel=stylesheet href=/lib/css/ui.css>
+<link rel=stylesheet href=/lib/css/irc.css>
 
 <div id=toolbar class=CodeMirror-gutter>
   <nav id=location-zone>
@@ -16,7 +16,7 @@
     </div>
   </nav>
   <div id=controls-zone class=btn-group>
-    <a class=btn id=settings title=settings href={{= file.path in uri}}?plug=meta>
+    <a class=btn id=settings title=settings href={{= file.path in uri}}?app=meta>
       <img src=/lib/icons/cogwheel.png>
     </a>
   </div>
@@ -35,7 +35,7 @@
   <input type=submit id=submit value=&#9654; class=btn>
 </form>
 
-<script src=/lib/js/scout.js?plug=none></script>
+<script src=/lib/js/scout.js></script>
 <script>
   (function() {
     // UI elements

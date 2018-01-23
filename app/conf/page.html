@@ -86,7 +86,7 @@ addEventListener('DOMContentLoaded', function() {
     this.callback = callback;
   };
 
-  var acl = metadata.acl || {};
+  var acl = metadata.acl = metadata.acl || {};
   aclTable.data = window.acl = acl;
   var aclTableWidget = function(element) {
     var data = element.data;
@@ -151,6 +151,13 @@ addEventListener('DOMContentLoaded', function() {
     saved.textContent = 'Saving…';
     saved.style.visibility = 'visible';
 
+    var savedMetadata = Object.create(null);
+    for (var key in metadata) {
+      if (!(key === 'acl' && Object.keys(acl).length === 0)) {
+        savedMetadata[key] = metadata[key];
+      }
+    }
+
     var xhr = new XMLHttpRequest();
     xhr.open('PUT', path + '?app=metadata', true);
     xhr.onload = function() {
@@ -166,7 +173,7 @@ addEventListener('DOMContentLoaded', function() {
       }
     };
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(metadata));
+    xhr.send(JSON.stringify(savedMetadata));
   });
 
   // Add user.

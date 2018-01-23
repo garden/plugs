@@ -46,23 +46,23 @@ var environment = (function() {
   var env = {
     'text/html': function(path) {
       unicorn('text/html')();
-      plug(preview, 'html')(path);
-      plug(run, 'none')(path);
+      app(preview, 'html')(path);
+      app(run, 'data')(path);
       download.style.display = 'none';
     },
     'text/javascript': setJS,
-    'text/x-latex': plug(preview, 'latex'),
+    'text/x-latex': app(preview, 'latex'),
     'text/x-markdown': function(path) {
       cm.addKeyMap({
         Enter: "newlineAndIndentContinueMarkdownList"
       });
-      plug(preview, 'livemarkdown')(path);
-      plug(run, 'markdown')(path);
+      app(preview, 'livemarkdown')(path);
+      app(run, 'markdown')(path);
     },
     'text/x-make': function() {
       cm.setOption('indentWithTabs', true);
     },
-    'text/x-sequence': plug(preview, 'sequence'),
+    'text/x-sequence': app(preview, 'sequence'),
     'text/css': unicorn('text/css'),
     'text/xml': unicorn('text/xml'),
     'text/vnd.abc': music,
@@ -119,11 +119,11 @@ var environment = (function() {
     'text/x-whitespace': ideone(6)
   };
 
-  // Connect an anchor element to a plug
-  function plug(element, plug) {
+  // Connect an anchor element to an app.
+  function app(element, app) {
     return function(path) {
       element.style.display = 'inline-block';
-      element.href = path + '?plug=' + plug;
+      element.href = path + '?app=' + app;
     }
   }
 

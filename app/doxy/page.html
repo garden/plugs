@@ -3,12 +3,12 @@
 <meta name=viewport content='width=device-width'>
 <title> {{= title in html}} </title>
 
-<link rel=stylesheet href=/lib/css/doxy.css?plug=none>
+<link rel=stylesheet href=/lib/css/doxy.css>
 
-<iframe id=source src="{{= file.path in uri}}?plug=pencil"></iframe>
+<iframe id=source src="{{= file.path in uri}}?app=text"></iframe>
 <div id=preview></div>
 
-<script src=/lib/js/doxy.js?plug=none></script>
+<script src=/lib/js/doxy.js></script>
 
 <script>
   var source =  document.getElementById('source'),
