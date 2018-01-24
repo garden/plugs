@@ -1,11 +1,12 @@
 <!doctype html>
 <meta charset=utf-8>
+{{ var title = path.slice(path.lastIndexOf('/') + 1) || 'The File Tree'; }}
 <title> {{= title in html}} </title>
 <link rel=stylesheet href=/lib/css/markdown.css>
 <body class=markdown></body>
 <script src=/lib/js/commonmark.js></script>
 <script>
-  var text = {{= file.content in json in script}};
+  var text = {{= data in json in script}};
   var reader = new commonmark.Parser({smart: true});
   var writer = new commonmark.HtmlRenderer();
   document.body.innerHTML = writer.render(reader.parse(text));

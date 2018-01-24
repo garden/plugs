@@ -1,11 +1,12 @@
 <!doctype html>
 <meta charset=utf-8>
 <meta name=viewport content='width=device-width'>
+{{ var title = path.slice(path.lastIndexOf('/') + 1) || 'The File Tree'; }}
 <title> {{= title in html}} </title>
 
 <link rel=stylesheet href=/lib/css/preview.css>
 
-<iframe id=source src="{{= file.path in path in xmlattr}}?app=text"></iframe>
+<iframe id=source src="{{= path in path in xmlattr}}?app=text"></iframe>
 <iframe id=preview></iframe>
 
 <script>
