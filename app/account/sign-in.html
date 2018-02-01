@@ -14,7 +14,7 @@
 
 <main class=about-page>
   <h1> Log In </h1>
-  <form action=/api/1/signin>
+  <form action='javascript:void 0' onsubmit='signIn(event)'>
     <p>
       <label><input name=email type=email placeholder='me@example.com'> — Email</label>
     </p>
@@ -27,3 +27,19 @@
   Clicking the link inside that email will log you in.
   </p>
 </main>
+
+<script>
+  function signIn(event) {
+    fetch('/api/1/signin', {method: 'POST', body: new FormData(event.target),
+      credentials: 'include'})
+    .then(function(res) {
+      if (!res.ok) {
+        res.json()
+        .then(function(json) { alert(json.errors.join('\n')); })
+        .catch(function(e) { alert(e); });
+      } else {
+        window.location.pathname = '/app/account/signed-in.html';
+      }
+    });
+  }
+</script>

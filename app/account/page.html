@@ -15,7 +15,7 @@
 <main class=about-page>
  {{if !loggedIn then {{
   <h1> Create an Account </h1>
-  <form action=/api/1/signup>
+  <form action='javascript:void 0' onsubmit='createAccount(event)'>
     <p>
       <label><input name=name placeholder=steph> — Name</label><br>
       <label><input name=email type=email placeholder='me@example.com'> — Email</label>
@@ -37,8 +37,24 @@
     <li> Email: {{= user.email in html}} </li>
     <li> Name: {{= user.name in html}} </li>
   </ul>
-  <form action=/api/1/logout>
+  <form action=/api/1/logout method=post>
     <button>Log Out</button>
   </form>
  }}}}
 </main>
+
+<script>
+  function createAccount(event) {
+    fetch('/api/1/signup', {method: 'POST', body: new FormData(event.target),
+      credentials: 'include'})
+    .then(function(res) {
+      if (!res.ok) {
+        res.json()
+        .then(function(json) { alert(json.errors.join('\n')); })
+        .catch(function(e) { alert(e); });
+      } else {
+        window.location.pathname = '/app/account/signed-up.html';
+      }
+    });
+  }
+</script>
