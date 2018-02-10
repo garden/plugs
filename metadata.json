@@ -98,18 +98,21 @@
       "makefile": "text/x-make",
       "Makefile": "text/x-make"
     },
-    "updated": "2016-12-16T15:43:10.266Z",
-    "modified": "2016-12-16T18:55:12.791Z"
+    "updated": "2018-02-04T11:24:06.794Z",
+    "modified": "2016-12-16T18:55:12.791Z",
+    "acl": {
+      "*": "r"
+    }
   },
   "files": {
     "app": {
       "meta": {
         "type": "folder",
-        "updated": "2017-11-17T21:08:02.179Z",
+        "updated": "2018-02-04T11:56:27.579Z",
         "modified": "2016-12-16T15:43:10.266Z",
         "acl": {
-          "espadrine": "x",
-          "*": "r"
+          "*": "r",
+          "espadrine": "x"
         }
       },
       "files": {
@@ -363,7 +366,7 @@
         "conf": {
           "meta": {
             "modified": "2017-10-01T17:57:29.143Z",
-            "updated": "2017-10-01T18:20:24.843Z",
+            "updated": "2018-02-04T11:25:01.071Z",
             "type": "folder",
             "params": [
               "metadata"
@@ -5902,6 +5905,18 @@
         "updated": "2016-08-29T23:25:53.497Z",
         "type": "text/plain"
       }
+    },
+    "espadrine": {
+      "meta": {
+        "modified": "2018-02-04T12:11:19.947Z",
+        "updated": "2018-02-04T12:13:14.371Z",
+        "type": "folder",
+        "acl": {
+          "espadrine": "x",
+          "*": "-"
+        }
+      },
+      "files": {}
     }
   }
 }

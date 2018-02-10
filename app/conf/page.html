@@ -59,12 +59,15 @@ for (var i = 0; i < crumbs.length; i++) {
     <table id='acl-table'></table>
     <button id=add-user>Add</button>
   </form>
+  <p><em>Parent permissions apply, unless overriden.</em></p>
 </main>
 
 <script>
 addEventListener('DOMContentLoaded', function() {
   var metadata = {{= metadata in json}};
   var path = {{= path in json}};
+  var accessAllowed = metadata !== undefined;
+  metadata = metadata || {};
 
   var save = document.getElementById('save');
   var saved = document.getElementById('saved');
@@ -133,7 +136,9 @@ addEventListener('DOMContentLoaded', function() {
         + '</select>';
     }
     html += '</tbody>';
-    if (Object.keys(data).length === 0) {
+    if (!accessAllowed) {
+      html += 'You do not have access rights to view this file’s metadata.'
+    } else if (Object.keys(data).length === 0) {
       html += 'There are no configured access rules yet.'
     }
     element.innerHTML = html;
@@ -160,6 +165,7 @@ addEventListener('DOMContentLoaded', function() {
 
     var xhr = new XMLHttpRequest();
     xhr.open('PUT', path + '?app=metadata', true);
+    xhr.withCredentials = true;
     xhr.onload = function() {
       if (xhr.status  < 200 || xhr.status >= 300) {
         alert('Saving the metadata failed with error code ' + xhr.status + ' ' +

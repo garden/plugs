@@ -43,6 +43,7 @@ addEventListener('DOMContentLoaded', function() {
 
     var xhr = new XMLHttpRequest();
     xhr.open('PUT', path + '?app=metadata', true);
+    xhr.withCredentials = true;
     xhr.onload = function() {
       if (xhr.status  < 200 || xhr.status >= 300) {
         alert('Saving the metadata failed with error code ' + xhr.status + ' ' +
