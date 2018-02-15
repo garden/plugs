@@ -1,6 +1,5 @@
-// Some scripting for the Pencil.
-// It is used whenever a user edits a file with the Pencil.
-// Copyright © 2011 Thaddée Tyl, Jan Keromnes. All rights reserved.
+// Helpers for the default text edition app.
+// Copyright © 2018 Thaddée Tyl, Jan Keromnes. All rights reserved.
 // The following code is covered by the GPLv2 license.
 
 
@@ -24,10 +23,7 @@ function stopEvent (e) {
 var loadScript = function(path) {
   return new Promise(function(resolve, reject) {
     var script = document.createElement('script');
-    script.addEventListener('load', function() {
-      // Execute the script.
-      resolve();
-    });
+    script.addEventListener('load', resolve);
     script.addEventListener('error', reject);
     script.async = false;
     script.src = path;
