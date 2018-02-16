@@ -421,6 +421,29 @@
             "updated": "2016-08-29T23:25:53.429Z",
             "type": "text/html"
           }
+        },
+        "doc": {
+          "meta": {
+            "type": "folder",
+            "modified": "2018-02-12T00:35:21.860Z",
+            "updated": "2018-02-12T00:35:21.860Z"
+          },
+          "files": {
+            "index.md": {
+              "meta": {
+                "modified": "2018-02-12T00:35:21.804Z",
+                "updated": "2018-02-12T00:35:21.860Z",
+                "type": "text/x-markdown"
+              }
+            }
+          }
+        },
+        "index.md": {
+          "meta": {
+            "modified": "2018-02-11T16:48:57.832Z",
+            "updated": "2018-02-11T16:48:57.932Z",
+            "type": "text/x-markdown"
+          }
         }
       }
     },
