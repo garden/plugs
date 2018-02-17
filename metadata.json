@@ -169,7 +169,10 @@
           "meta": {
             "type": "folder",
             "modified": "2016-08-04T22:31:48.824Z",
-            "updated": "2016-08-04T22:31:48.824Z"
+            "updated": "2016-08-04T22:31:48.824Z",
+            "params": [
+              "data"
+            ]
           },
           "files": {
             "page.html": {
@@ -185,7 +188,10 @@
           "meta": {
             "type": "folder",
             "modified": "2016-08-04T22:32:09.064Z",
-            "updated": "2016-08-04T22:32:09.064Z"
+            "updated": "2016-08-04T22:32:09.064Z",
+            "params": [
+              "data"
+            ]
           },
           "files": {
             "page.html": {
@@ -218,7 +224,10 @@
           "meta": {
             "type": "folder",
             "modified": "2016-08-04T22:32:42.264Z",
-            "updated": "2016-08-04T22:32:42.264Z"
+            "updated": "2016-08-04T22:32:42.264Z",
+            "params": [
+              "data"
+            ]
           },
           "files": {
             "page.html": {
@@ -234,7 +243,10 @@
           "meta": {
             "type": "folder",
             "modified": "2016-08-04T22:52:21.571Z",
-            "updated": "2016-08-04T22:52:21.571Z"
+            "updated": "2016-08-04T22:52:21.571Z",
+            "params": [
+              "data"
+            ]
           },
           "files": {
             "page.html": {
@@ -250,7 +262,10 @@
           "meta": {
             "type": "folder",
             "modified": "2016-08-04T22:52:35.475Z",
-            "updated": "2016-08-04T22:52:35.475Z"
+            "updated": "2016-08-04T22:52:35.475Z",
+            "params": [
+              "data"
+            ]
           },
           "files": {
             "page.html": {
@@ -285,7 +300,10 @@
           "meta": {
             "type": "folder",
             "modified": "2016-08-04T22:53:06.123Z",
-            "updated": "2016-08-04T22:53:06.123Z"
+            "updated": "2016-08-04T22:53:06.123Z",
+            "params": [
+              "data"
+            ]
           },
           "files": {
             "page.html": {
