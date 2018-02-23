@@ -176,7 +176,7 @@ var environment = (function() {
   // Export code to Codepad for remote execution
   function codepad(lang) {
     return function() {
-      document.export.action = run.href = 'http://codepad.org/';
+      document.export.action = run.href = 'https://codepad.org/';
       document.export.lang.value = lang;
       run.style.display = 'inline-block';
       run.onclick = function(e) {
@@ -190,10 +190,10 @@ var environment = (function() {
   // Export code to IDEone
   function ideone(lang) {
     return function() {
-      document.export.action = 'http://ideone.com/ideone/Index/submit/';
+      document.export.action = 'https://ideone.com/ideone/Index/submit/';
       document.export.lang.value = lang;
       document.export.run.value = 1;
-      run.href = 'http://ideone.com/';
+      run.href = 'https://ideone.com/';
       run.style.display = 'inline-block';
       run.onclick = function(e) {
         document.export.file.value = cm.getValue();
@@ -206,9 +206,9 @@ var environment = (function() {
   // Export code to Unicorn for HTML/CSS/XML validation
   function unicorn(mime) {
     return function () {
-      document.export.action = 'http://validator.w3.org/unicorn/check#validate-by-input';
+      document.export.action = 'https://validator.w3.org/unicorn/check#validate-by-input';
       document.export.ucn_text_mime.value = mime;
-      validate.href = 'http://validator.w3.org/unicorn/';
+      validate.href = 'https://validator.w3.org/unicorn/';
       validate.style.display = 'inline-block';
       validate.onclick = function(e) {
         document.export.ucn_text.value = cm.getValue();
