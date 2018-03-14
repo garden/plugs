@@ -88,6 +88,7 @@ for (var i = 0; i < crumbs.length; i++) {
     var path = {{= path in json in script}};
     var permission = {{= permission in json in script}};
     var mime = {{= metadata.type in json in script}} || 'text/plain';
+    var username = {{= user in json in script}};
     var codeMirrorParams = {
       mode: mime,
       value: {{= data in json in script}},
@@ -130,9 +131,10 @@ for (var i = 0; i < crumbs.length; i++) {
         window.location.host + window.location.pathname + "?op=edit&app=text",
     });
     canop.ui.codemirror(canopClient, cm);
-    canopClient.once('synced', function() {
+    canopClient.once('ready', function() {
       if (/^[wx]$/.test(permission)) {
         cm.setOption('readOnly', false);
+        canopClient.signal({name: username});
       }
     });
     var syncState = document.getElementById('sync-state');
