@@ -88,7 +88,7 @@ for (var i = 0; i < crumbs.length; i++) {
     var path = {{= path in json in script}};
     var permission = {{= permission in json in script}};
     var mime = {{= metadata.type in json in script}} || 'text/plain';
-    var username = {{= user in json in script}};
+    var username = {{= user.name in json in script}};
     var codeMirrorParams = {
       mode: mime,
       value: {{= data in json in script}},
