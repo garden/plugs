@@ -4242,14 +4242,6 @@
                 "type": "text/javascript"
               }
             },
-            "plugger.js": {
-              "meta": {
-                "app": "data",
-                "modified": "2016-08-29T23:25:53.461Z",
-                "updated": "2016-08-29T23:25:53.461Z",
-                "type": "text/javascript"
-              }
-            },
             "scout.js": {
               "meta": {
                 "app": "data",
