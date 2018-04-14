@@ -75,6 +75,10 @@ A file opens with a given app if:
 If the specified app does not start with `/` (eg. `text`), it is assumed to
 be prefixed by `/app/` (eg. `/app/text`).
 
+Apps located in `/app/` (*core apps*) are always allowed (and support
+templating); other apps must be manually enabled by the user by adding it to
+the list of allowedApps in their home folder's metadata.
+
 As a user, you can affect a newly created file’s default type based on its
 extension. For instance, if you want `*.code` files to have type `text/code`,
 you can change any ancestor folder to have a `mime` field like so:
@@ -104,3 +108,4 @@ folder’s metadata:
   and update as owner.
 - `/path/in/metadata`: get read access to a subset of a file’s metadata (or
   of the user directory’s metadata) from a JSON Pointer.
+
