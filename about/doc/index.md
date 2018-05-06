@@ -90,8 +90,6 @@ parameters when loading a file:
 - `path`: a string of the file’s path
 - `permission`: the level of ownership (`-`, `r`, `w`, `x`)
 - `metadata`: a JS object of the metadata
-- `appAuthHeader`: a string to put in an `APP_AUTH` header if you send HTTP
-  requests to fetch information from thefiletree.com as the current user.
 - `params`: an object containing information requested by the app.
   For instance, if the app folder’s metadata includes
   `{"params": ["data", "metadata", "/github/secret"]}`, the `params` key may
