@@ -1,0 +1,44 @@
+<!doctype html>
+<meta charset=utf-8>
+<meta name=viewport content='width=device-width'>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<title> Log In </title>
+
+<link rel=stylesheet href=/lib/css/ui.css>
+
+<nav id=toolbar>
+  <a href='/' class="item crumb root-crumb"></a>
+  <a href='/app/' class="item crumb">app</a>
+  <a href='/app/account/' class="item crumb">account</a>
+</nav>
+
+<main class=about-page>
+  <h1> Log In </h1>
+  <form action='javascript:void 0' onsubmit='signIn(event)'>
+    <p>
+      <label><input name=email type=email placeholder='me@example.com'> — Email</label>
+    </p>
+    <button>Sign In</button>
+  </form>
+  <p>
+  Once you sign in, we will send you an email within a few minutes to
+  confirm your ownership of that email address. <br>
+  Clicking the link inside that email will log you in.
+  </p>
+</main>
+
+<script>
+  function signIn(event) {
+    fetch('/api/1/signin', {method: 'POST', body: new FormData(event.target),
+      credentials: 'include'})
+    .then(function(res) {
+      if (!res.ok) {
+        res.json()
+        .then(function(json) { alert(json.errors.join('\n')); })
+        .catch(function(e) { alert(e); });
+      } else {
+        window.location.pathname = '/app/account/signed-in.html';
+      }
+    });
+  }
+</script>
