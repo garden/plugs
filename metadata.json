@@ -14,7 +14,7 @@
       "ejs": "application/x-ejs",
       "jsp": "application/x-jsp",
       "xml": "application/xml",
-      "×xquery": "application/xquery",
+      "xquery": "application/xquery",
       "css": "text/css",
       "html": "text/html",
       "js": "text/javascript",
