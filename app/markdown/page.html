@@ -10,4 +10,7 @@
   var reader = new commonmark.Parser({smart: true});
   var writer = new commonmark.HtmlRenderer();
   document.body.innerHTML = writer.render(reader.parse(text));
+  // Scripts are not rendered by default. Explicitly run them.
+  document.body.querySelectorAll('script').forEach(
+    function(script) { eval(script.textContent); });
 </script>
