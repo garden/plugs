@@ -5,23 +5,33 @@
 <title> {{= title in html}} </title>
 
 <link rel=stylesheet href=/lib/css/preview.css>
-<link rel=stylesheet href=/lib/css/markdown.css>
 
 <iframe id=source src="{{= path in path in xmlattr}}?app=text"></iframe>
-<div id=preview class=markdown></div>
+<iframe id=preview></iframe>
 
 <script src=/lib/js/commonmark.js></script>
 
 <script>
   var source =  document.getElementById('source');
   var preview = document.getElementById('preview');
+  var currentPage = '', nextPage = '';
   var reader = new commonmark.Parser({smart: true});
   var writer = new commonmark.HtmlRenderer();
 
   source.contentWindow.addEventListener('message', function(event) {
-    preview.innerHTML = writer.render(reader.parse(event.data));
+    nextPage = event.data;
+    setTimeout(replacePreview, 0);
   });
-</script>
 
-<!-- Google Analytics -->
-<script>var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-27876347-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})()</script>
+  function replacePreview() {
+    if (currentPage === nextPage) {return;}
+    var html = preview.contentDocument.documentElement;
+    var scrollX = html.scrollLeft, scrollY = html.scrollTop;
+    preview.srcdoc = '<link rel=stylesheet href=/lib/css/markdown.css>' +
+      '<body class=markdown>' +
+      writer.render(reader.parse(nextPage));
+    preview.onload = function() {
+      preview.contentDocument.documentElement.scrollTo(scrollX, scrollY); };
+    currentPage = nextPage;
+  }
+</script>
