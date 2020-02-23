@@ -11,6 +11,19 @@
   var writer = new commonmark.HtmlRenderer();
   document.body.innerHTML = writer.render(reader.parse(text));
   // Scripts are not rendered by default. Explicitly run them.
-  document.body.querySelectorAll('script').forEach(
-    function(script) { eval(script.textContent); });
+  var scripts = document.body.querySelectorAll('script');
+  var nSrc = [...scripts].filter(s => s.src.length > 0).length;
+  var nLoadedSrc = 0;
+  scripts.forEach(script => {
+    if (script.src.length > 0) {
+      fetch(script.src).then(res => res.text()).
+      then(script => {
+        eval.call(window, script);
+        nLoadedSrc++;
+        if (nLoadedSrc >= nSrc) { dispatchEvent(new Event('load')); }
+      }).catch(e => {throw e});
+    } else {
+      eval.call(window, script.textContent);
+    }
+  });
 </script>
