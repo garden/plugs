@@ -54,6 +54,7 @@
   max-width: 17cm;
 }
 .markdown > img,
+.markdown > figure > img,
 .markdown > a > img:only-child {
   display: block;
   margin: auto;
@@ -69,6 +70,7 @@
     max-width: calc(100vw - 16px);
   }
   .markdown > img,
+  .markdown > figure > img,
   .markdown > a > img:only-child {
     max-width: calc(100vw - 12px - 16px);
   }
