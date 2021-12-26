@@ -2,46 +2,50 @@
 <meta charset=utf-8>
 {{ var title = path.slice(path.lastIndexOf('/') + 1) || 'The File Tree'; }}
 <title> {{= title in html}} </title>
-<link rel=stylesheet href=/lib/css/markdown.css>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/default.min.css">
 <style>
-  h1 .autolink-clicker,
-  h2 .autolink-clicker,
-  h3 .autolink-clicker,
-  h4 .autolink-clicker,
-  h5 .autolink-clicker,
-  h6 .autolink-clicker {
-    visibility: hidden;
+  html {
+    height: 100%;
+    overflow: hidden;
   }
-  h1:hover .autolink-clicker,
-  h2:hover .autolink-clicker,
-  h3:hover .autolink-clicker,
-  h4:hover .autolink-clicker,
-  h5:hover .autolink-clicker,
-  h6:hover .autolink-clicker {
-    visibility: visible;
+  body {
+    margin: 0;
+    height: 100%;
+  }
+  iframe.markdown-render {
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
 </style>
-<body class=markdown></body>
+<body></body>
 <script src=/lib/js/latexmarkdown.min.js></script>
 <script>
   var text = {{= data in json in script}};
-  document.body.innerHTML = latexmarkdown.renderHTML(text);
-  // Scripts are not rendered by default. Explicitly run them.
-  var scripts = document.body.querySelectorAll('script');
-  var nSrc = [...scripts].filter(s => s.src.length > 0).length;
-  var nLoadedSrc = 0;
-  scripts.forEach(script => {
-    if (script.src.length > 0) {
-      fetch(script.src).then(res => res.text()).
-      then(script => {
-        eval.call(window, script);
-        nLoadedSrc++;
-        if (nLoadedSrc >= nSrc) { dispatchEvent(new Event('load')); }
-      }).catch(e => {throw e});
-    } else {
-      eval.call(window, script.textContent);
-    }
-  });
+  var html = latexmarkdown.renderHTMLDoc(text);
+  var iframe = document.createElement('iframe');
+  iframe.className = 'markdown-render';
+  iframe.srcdoc = '<link rel=stylesheet href=/lib/css/markdown.css>' +
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">' +
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/default.min.css">' +
+    '<style>' +
+    '  h1 .autolink-clicker,' +
+    '  h2 .autolink-clicker,' +
+    '  h3 .autolink-clicker,' +
+    '  h4 .autolink-clicker,' +
+    '  h5 .autolink-clicker,' +
+    '  h6 .autolink-clicker {' +
+    '    visibility: hidden;' +
+    '  }' +
+    '  h1:hover .autolink-clicker,' +
+    '  h2:hover .autolink-clicker,' +
+    '  h3:hover .autolink-clicker,' +
+    '  h4:hover .autolink-clicker,' +
+    '  h5:hover .autolink-clicker,' +
+    '  h6:hover .autolink-clicker {' +
+    '    visibility: visible;' +
+    '  }' +
+    '</style>' +
+    '<body class=markdown>' +
+    html;
+  document.body.appendChild(iframe);
 </script>
