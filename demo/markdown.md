@@ -24,13 +24,13 @@ This has gone on for long enough. It is time for a section break.
 
 ---
 
-Let us now consider some recursive code:
+Let us now consider some recursive code, of complexity $`O(\infty)`:
 
-```js
+```javascript
 let recurse = () => {
   request('google.com/?q=recursion')
   .then(recurse)
 }
 ```
 
-<img src=https://upload.wikimedia.org/wikipedia/commons/6/66/Agasthiyamalai_range_and_Tirunelveli_rainshadow.jpg class=center>
+<img src=https://upload.wikimedia.org/wikipedia/commons/6/66/Agasthiyamalai_range_and_Tirunelveli_rainshadow.jpg>

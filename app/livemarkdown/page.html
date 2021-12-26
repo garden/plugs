@@ -5,18 +5,35 @@
 <title> {{= title in html}} </title>
 
 <link rel=stylesheet href=/lib/css/preview.css>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/default.min.css">
+<style>
+  h1 .autolink-clicker,
+  h2 .autolink-clicker,
+  h3 .autolink-clicker,
+  h4 .autolink-clicker,
+  h5 .autolink-clicker,
+  h6 .autolink-clicker {
+    visibility: hidden;
+  }
+  h1:hover .autolink-clicker,
+  h2:hover .autolink-clicker,
+  h3:hover .autolink-clicker,
+  h4:hover .autolink-clicker,
+  h5:hover .autolink-clicker,
+  h6:hover .autolink-clicker {
+    visibility: visible;
+  }
+</style>
 
 <iframe id=source src="{{= path in path in xmlattr}}?app=text"></iframe>
 <iframe id=preview></iframe>
 
-<script src=/lib/js/commonmark.js></script>
-
+<script src=/lib/js/latexmarkdown.min.js></script>
 <script>
   var source =  document.getElementById('source');
   var preview = document.getElementById('preview');
   var currentPage = '', nextPage = '';
-  var reader = new commonmark.Parser({smart: true});
-  var writer = new commonmark.HtmlRenderer();
 
   source.contentWindow.addEventListener('message', function(event) {
     nextPage = event.data;
@@ -29,7 +46,7 @@
     var scrollX = html.scrollLeft, scrollY = html.scrollTop;
     preview.srcdoc = '<link rel=stylesheet href=/lib/css/markdown.css>' +
       '<body class=markdown>' +
-      writer.render(reader.parse(nextPage));
+      latexmarkdown.renderHTML(nextPage);
     preview.onload = function() {
       preview.contentDocument.documentElement.scrollTo(scrollX, scrollY); };
     currentPage = nextPage;

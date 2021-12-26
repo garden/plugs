@@ -42,13 +42,19 @@
 .markdown h1 { text-align: center; }
 .markdown h1, .markdown h2, .markdown h3, .markdown h4,
 .markdown h5, .markdown h6 { color: black; }
+.markdown h1:hover .autolink-clicker, .markdown h2:hover .autolink-clicker, .markdown h3:hover .autolink-clicker, .markdown h4:hover .autolink-clicker, .markdown h5:hover .autolink-clicker, .markdown h6:hover .autolink-clicker {
+  visibility: visible;
+}
+.markdown h1 .autolink-clicker, .markdown h2 .autolink-clicker, .markdown h3 .autolink-clicker, .markdown h4 .autolink-clicker, .markdown h5 .autolink-clicker, .markdown h6 .autolink-clicker {
+  visibility: hidden;
+}
 .markdown p { text-align: justify; }
 .markdown p > img {
   max-height: 90vh;
   max-width: 17cm;
 }
-.markdown p > img:only-child,
-.markdown p > a:only-child > img, {
+.markdown > img,
+.markdown > a > img:only-child {
   display: block;
   margin: auto;
   margin-left: 50%;
@@ -58,12 +64,12 @@
   max-width: calc(17cm - 12px);
 }
 @media (max-width: 17cm) {
-  .markdown p > img {
+  .markdown > img {
     /* 16px for the markdown padding. */
     max-width: calc(100vw - 16px);
   }
-  .markdown p > img:only-child,
-  .markdown p > a:only-child > img {
+  .markdown > img,
+  .markdown > a > img:only-child {
     max-width: calc(100vw - 12px - 16px);
   }
 }
